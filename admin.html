@@ -1,11 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>V2GURD Admin</title>
+<title>V2GURD Channel</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -33,6 +34,7 @@ body{
     background:#020608;
     color:var(--text);
     font-family:"Vazirmatn",sans-serif;
+    overflow-x:hidden;
 }
 
 body::before{
@@ -56,27 +58,37 @@ body::before{
     filter:blur(120px);
     opacity:.12;
     z-index:-4;
+    pointer-events:none;
 }
 
-.green{
+.glow.green{
     background:var(--green);
     top:-180px;
     right:-150px;
 }
 
-.blue{
+.glow.blue{
     background:var(--blue);
     bottom:-180px;
     left:-150px;
 }
 
+.glow.red{
+    background:var(--red);
+    width:250px;
+    height:250px;
+    top:45%;
+    left:45%;
+    opacity:.035;
+}
+
 
 /* HEADER */
 
-header{
+.header{
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:20;
 
     background:rgba(2,7,9,.78);
 
@@ -85,315 +97,372 @@ header{
     backdrop-filter:blur(25px);
 }
 
-.header{
-    width:min(850px,calc(100% - 24px));
+.header-inner{
+    width:min(700px,calc(100% - 24px));
     margin:auto;
 
-    padding:16px 0;
+    padding:15px 0;
 
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    gap:13px;
 }
 
-.logo{
-    font-size:20px;
+.avatar{
+    width:52px;
+    height:52px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:19px;
+    font-weight:800;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(57,255,136,.18),
+            rgba(2,10,13,.95)
+        );
+
+    border:1px solid rgba(57,255,136,.3);
+
+    box-shadow:
+        0 0 25px rgba(57,255,136,.1);
+}
+
+.channel-info{
+    flex:1;
+}
+
+.channel-name{
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    font-size:15px;
     font-weight:800;
 }
 
-.verify{
+.verified{
+    width:17px;
+    height:17px;
+
     display:inline-flex;
     align-items:center;
     justify-content:center;
-
-    width:19px;
-    height:19px;
 
     border-radius:50%;
 
     background:#168fff;
     color:white;
 
-    font-size:11px;
+    font-size:10px;
 
-    box-shadow:0 0 15px rgba(22,143,255,.6);
+    box-shadow:
+        0 0 12px rgba(22,143,255,.6);
 }
 
-.admin-label{
-    color:var(--green);
+.channel-status{
+    margin-top:3px;
+
+    color:var(--muted);
+
     font-size:9px;
-    letter-spacing:2px;
+}
+
+.online{
+    color:var(--green);
+}
+
+.telegram-btn{
+    text-decoration:none;
+
+    color:white;
+
+    padding:9px 13px;
+
+    border-radius:13px;
+
+    background:rgba(33,150,255,.1);
+
+    border:1px solid rgba(33,150,255,.2);
+
+    font-size:9px;
+
+    transition:.3s;
+}
+
+.telegram-btn:hover{
+    background:rgba(33,150,255,.2);
+    transform:translateY(-2px);
 }
 
 
 /* MAIN */
 
-main{
-    width:min(850px,calc(100% - 24px));
+.container{
+    width:min(700px,calc(100% - 24px));
     margin:auto;
 
-    padding:35px 0 70px;
-}
-
-.title{
-    margin-bottom:22px;
-}
-
-.title small{
-    color:var(--green);
-    font-size:9px;
-    letter-spacing:3px;
-}
-
-.title h1{
-    margin-top:7px;
-    font-size:28px;
-}
-
-.title p{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:6px;
+    padding:30px 0 70px;
 }
 
 
-/* CARD */
+/* INTRO */
 
-.card{
+.channel-card{
     padding:22px;
+
+    margin-bottom:18px;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,25,31,.78),
+            rgba(3,10,14,.72)
+        );
+
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(22px);
+
+    text-align:center;
+}
+
+.channel-card h1{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.channel-card h1 span{
+    color:var(--green);
+
+    text-shadow:
+        0 0 20px rgba(57,255,136,.2);
+}
+
+.channel-card p{
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:2;
+}
+
+.channel-stats{
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    margin-top:16px;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.channel-stats b{
+    color:var(--green);
+}
+
+
+/* POSTS */
+
+#posts{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.post{
+    padding:19px;
+
     border-radius:22px;
 
     background:var(--card);
 
-    border:1px solid var(--border);
+    border:1px solid rgba(255,255,255,.055);
 
     backdrop-filter:blur(20px);
 
-    margin-bottom:16px;
-}
-
-.card-title{
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:17px;
-}
-
-
-/* INPUT */
-
-label{
-    display:block;
-
-    color:#71877e;
-
-    font-size:9px;
-
-    margin-bottom:7px;
-}
-
-input,
-textarea,
-select{
-
-    width:100%;
-
-    border:none;
-    outline:none;
-
-    color:white;
-
-    font-family:inherit;
-    font-size:11px;
-
-    background:rgba(0,0,0,.28);
-
-    border:1px solid rgba(255,255,255,.06);
-
-    border-radius:13px;
-
-    padding:13px;
-
-    margin-bottom:15px;
-
-    transition:.25s;
-}
-
-textarea{
-    min-height:150px;
-    resize:vertical;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-
-    border-color:rgba(57,255,136,.35);
-
     box-shadow:
-        0 0 20px rgba(57,255,136,.05);
+        0 15px 45px rgba(0,0,0,.18);
+
+    animation:postIn .6s ease both;
 }
 
+@keyframes postIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
 
-/* BUTTON */
-
-button{
-
-    width:100%;
-
-    border:none;
-
-    cursor:pointer;
-
-    font-family:inherit;
-
-    color:#001108;
-
-    background:var(--green);
-
-    padding:13px;
-
-    border-radius:13px;
-
-    font-size:11px;
-
-    font-weight:800;
-
-    transition:.25s;
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-button:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 0 25px rgba(57,255,136,.2);
-}
-
-
-/* PREVIEW */
-
-.preview{
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:18px;
-
-    padding:17px;
-
-    background:rgba(0,0,0,.18);
-}
-
-.preview-header{
-
+.post-header{
     display:flex;
-
     align-items:center;
-
     gap:9px;
 
-    margin-bottom:12px;
+    margin-bottom:13px;
 }
 
-.preview-avatar{
+.post-avatar{
+    width:36px;
+    height:36px;
 
-    width:35px;
-    height:35px;
+    border-radius:50%;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:50%;
-
     background:rgba(57,255,136,.08);
 
-}
+    border:1px solid rgba(57,255,136,.15);
 
-.preview-name{
-    font-size:10px;
-    font-weight:700;
-}
-
-.preview-date{
-    color:#50615b;
-    font-size:8px;
-}
-
-.preview-title{
-    color:var(--green);
     font-size:13px;
-    font-weight:700;
-    margin-bottom:8px;
 }
 
-.preview-text{
-    color:#b4c5be;
+.post-author{
     font-size:10px;
+    font-weight:700;
+}
+
+.post-date{
+    display:block;
+
+    color:#53645e;
+
+    font-size:8px;
+
+    margin-top:2px;
+}
+
+.post-title{
+    font-size:14px;
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    color:var(--green);
+}
+
+.post-text{
+    color:#b4c5be;
+
+    font-size:10px;
+
     line-height:2;
+
     white-space:pre-line;
 }
 
-
-/* STATUS */
-
-.status{
-
+.post-footer{
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    gap:7px;
 
+    margin-top:15px;
+    padding-top:11px;
+
+    border-top:1px solid rgba(255,255,255,.04);
+
+    color:#4f625b;
+
+    font-size:8px;
+}
+
+.post-tag{
     color:var(--green);
-
-    font-size:9px;
-
-    margin-top:13px;
-}
-
-.dot{
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:var(--green);
-
-    box-shadow:0 0 12px var(--green);
 }
 
 
-/* BACK */
+/* TYPES */
 
-.back{
+.post.important{
+    border-color:rgba(255,65,100,.2);
+}
 
-    display:block;
+.post.important .post-title{
+    color:var(--red);
+}
 
+.post.update{
+    border-color:rgba(33,150,255,.18);
+}
+
+.post.update .post-title{
+    color:var(--blue);
+}
+
+.post.success{
+    border-color:rgba(57,255,136,.18);
+}
+
+
+/* LOADING */
+
+.loading{
     text-align:center;
 
-    margin-top:20px;
+    padding:35px;
 
     color:var(--muted);
 
-    text-decoration:none;
-
-    font-size:9px;
+    font-size:10px;
 }
 
-.back:hover{
+.loading span{
     color:var(--green);
+}
+
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+
+    padding:30px;
+
+    color:#40514b;
+
+    font-size:8px;
+}
+
+.footer b{
+    color:#71877e;
 }
 
 
 @media(max-width:600px){
 
-    .title h1{
-        font-size:23px;
+    .telegram-btn{
+        font-size:8px;
+        padding:8px 10px;
     }
 
-    .card{
-        padding:17px;
+    .channel-name{
+        font-size:13px;
     }
 
+    .channel-card h1{
+        font-size:19px;
+    }
 }
 
 </style>
@@ -404,239 +473,335 @@ button:hover{
 
 <div class="glow green"></div>
 <div class="glow blue"></div>
+<div class="glow red"></div>
 
 
-<header>
+<header class="header">
 
-    <div class="header">
+    <div class="header-inner">
 
-        <div class="logo">
+        <div class="avatar">
+            V2
+        </div>
 
-            V2GURD
-            <span class="verify">✓</span>
+        <div class="channel-info">
+
+            <div class="channel-name">
+
+                V2GURD
+
+                <span class="verified">
+                    ✓
+                </span>
+
+            </div>
+
+            <div class="channel-status">
+
+                <span class="online">●</span>
+                Official Channel
+
+            </div>
 
         </div>
 
-        <div class="admin-label">
-            ADMIN PANEL
-        </div>
+
+        <a
+            class="telegram-btn"
+            href="https://t.me/v2gurdd"
+            target="_blank"
+        >
+            TELEGRAM ↗
+        </a>
 
     </div>
 
 </header>
 
 
-<main>
+
+<main class="container">
 
 
-    <section class="title">
-
-        <small>
-            V2GURD CONTROL CENTER
-        </small>
+    <section class="channel-card">
 
         <h1>
-            مدیریت اطلاعیه‌ها
+
+            <span>V2GURD</span>
+            CHANNEL
+
         </h1>
 
         <p>
-            ساخت و آماده‌سازی پست جدید برای کانال V2GURD
+
+            کانال رسمی اطلاع‌رسانی V2GURD
+            <br>
+            اخبار، بروزرسانی سرورها، اختلالات،
+            تخفیف‌ها و اطلاعیه‌های مهم
+
         </p>
 
-    </section>
+        <div class="channel-stats">
 
+            <span>
+                STATUS:
+                <b>ONLINE</b>
+            </span>
 
-    <!-- CREATE POST -->
-
-    <section class="card">
-
-        <div class="card-title">
-            📢 اطلاعیه جدید
-        </div>
-
-
-        <label>
-            عنوان اطلاعیه
-        </label>
-
-        <input
-            id="postTitle"
-            type="text"
-            placeholder="مثلاً: بروزرسانی سرورها"
-        >
-
-
-        <label>
-            نوع اطلاعیه
-        </label>
-
-        <select id="postType">
-
-            <option value="normal">
-                📢 اطلاعیه عادی
-            </option>
-
-            <option value="important">
-                🚨 اطلاعیه مهم
-            </option>
-
-            <option value="update">
-                🛠️ بروزرسانی
-            </option>
-
-            <option value="success">
-                🟢 وضعیت پایدار
-            </option>
-
-        </select>
-
-
-        <label>
-            متن اطلاعیه
-        </label>
-
-        <textarea
-            id="postText"
-            placeholder="متن اطلاعیه را اینجا بنویس..."
-        ></textarea>
-
-
-        <button onclick="previewPost()">
-            نمایش پیش‌نمایش
-        </button>
-
-    </section>
-
-
-    <!-- PREVIEW -->
-
-    <section class="card">
-
-        <div class="card-title">
-            👁️ پیش‌نمایش
-        </div>
-
-
-        <div class="preview">
-
-            <div class="preview-header">
-
-                <div class="preview-avatar">
-                    V2
-                </div>
-
-                <div>
-
-                    <div class="preview-name">
-                        V2GURD ✓
-                    </div>
-
-                    <div class="preview-date" id="date">
-                        همین الان
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="preview-title"
-                id="previewTitle"
-            >
-                عنوان اطلاعیه
-            </div>
-
-
-            <div
-                class="preview-text"
-                id="previewText"
-            >
-                متن اطلاعیه اینجا نمایش داده می‌شود.
-            </div>
-
-
-            <div class="status">
-
-                <span class="dot"></span>
-
-                READY TO PUBLISH
-
-            </div>
+            <span>
+                NETWORK:
+                <b>SECURE</b>
+            </span>
 
         </div>
 
     </section>
 
 
-    <a
-        class="back"
-        href="./index.html"
-    >
-        ← بازگشت به کانال V2GURD
-    </a>
+    <div id="posts">
+
+        <div class="loading">
+            در حال دریافت اطلاعیه‌ها
+            <br>
+            <span>V2GURD NETWORK...</span>
+        </div>
+
+    </div>
 
 
 </main>
 
 
+<footer class="footer">
+
+    <b>V2GURD ✓</b>
+    — OFFICIAL INFORMATION CHANNEL
+
+</footer>
+
+
+
 <script>
 
-function previewPost(){
+/* ==========================
+   SUPABASE
+========================== */
 
-    const title =
-        document.getElementById("postTitle").value;
+const SUPABASE_URL =
+    "https://dymfrorzgmmsbvazsvnb.supabase.co";
 
-    const text =
-        document.getElementById("postText").value;
-
-    const type =
-        document.getElementById("postType").value;
-
-
-    document.getElementById(
-        "previewTitle"
-    ).textContent =
-        title || "عنوان اطلاعیه";
+const SUPABASE_KEY =
+    "sb_publishable_UXgv11NDv5gIxPdKwMZwZQ_WSQZa2qw";
 
 
-    document.getElementById(
-        "previewText"
-    ).textContent =
-        text || "متن اطلاعیه اینجا نمایش داده می‌شود.";
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-    const titleElement =
-        document.getElementById("previewTitle");
+/* ==========================
+   LOAD POSTS
+========================== */
+
+async function loadPosts(){
+
+    const postsContainer =
+        document.getElementById("posts");
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+
+        .from("posts")
+
+        .select("*")
+
+        .eq("published", true)
+
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
 
 
-    if(type === "important"){
+    if(error){
 
-        titleElement.style.color =
-            "#ff4164";
+        console.error(error);
 
-    }else if(type === "update"){
+        postsContainer.innerHTML = `
 
-        titleElement.style.color =
-            "#2196ff";
+            <div class="loading">
 
-    }else{
+                ❌ خطا در دریافت اطلاعیه‌ها
 
-        titleElement.style.color =
-            "#39ff88";
+                <br>
 
+                <span>
+                    V2GURD DATABASE ERROR
+                </span>
+
+            </div>
+
+        `;
+
+        return;
     }
 
 
-    const now =
-        new Date();
+    if(!data || data.length === 0){
 
-    document.getElementById(
-        "date"
-    ).textContent =
-        now.toLocaleString("fa-IR");
+        postsContainer.innerHTML = `
+
+            <div class="loading">
+
+                هنوز اطلاعیه‌ای منتشر نشده.
+
+                <br>
+
+                <span>
+                    V2GURD CHANNEL READY
+                </span>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    postsContainer.innerHTML = "";
+
+
+    data.forEach(post => {
+
+        const article =
+            document.createElement("article");
+
+        article.className =
+            "post " + (
+                post.type || "normal"
+            );
+
+
+        const date =
+            new Date(post.created_at);
+
+
+        const dateText =
+            date.toLocaleString(
+                "fa-IR",
+                {
+                    dateStyle:"medium",
+                    timeStyle:"short"
+                }
+            );
+
+
+        let icon = "📢";
+
+        if(post.type === "important"){
+            icon = "🚨";
+        }
+
+        if(post.type === "update"){
+            icon = "🛠️";
+        }
+
+        if(post.type === "success"){
+            icon = "🟢";
+        }
+
+
+        article.innerHTML = `
+
+            <div class="post-header">
+
+                <div class="post-avatar">
+                    ${icon}
+                </div>
+
+                <div>
+
+                    <div class="post-author">
+                        V2GURD ✓
+                    </div>
+
+                    <span class="post-date">
+                        ${dateText}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="post-title">
+                ${escapeHTML(post.title)}
+            </div>
+
+
+            <div class="post-text">
+                ${escapeHTML(post.content)}
+            </div>
+
+
+            <div class="post-footer">
+
+                <span>
+                    V2GURD ✓
+                </span>
+
+                <span class="post-tag">
+                    #${String(post.type || "INFO").toUpperCase()}
+                </span>
+
+            </div>
+
+        `;
+
+
+        postsContainer.appendChild(article);
+
+    });
 
 }
+
+
+/* ==========================
+   SECURITY
+========================== */
+
+function escapeHTML(text){
+
+    return String(text ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ==========================
+   START
+========================== */
+
+loadPosts();
+
+
+/* هر ۳۰ ثانیه دوباره بررسی می‌کند */
+
+setInterval(
+    loadPosts,
+    30000
+);
 
 </script>
 
