@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,14 +16,17 @@
 
 :root{
     --bg:#0b1218;
-    --header:#111b23;
-    --card:#17232d;
-    --card2:#1a2933;
+    --header:#17232d;
+    --card:#182630;
+    --card2:#202f39;
+
     --green:#39ff88;
     --blue:#168fff;
     --red:#ff4969;
-    --text:#f1f7f5;
-    --muted:#8da09a;
+
+    --text:#f2f7f5;
+    --muted:#8b9b96;
+
     --line:rgba(255,255,255,.07);
 }
 
@@ -31,247 +36,275 @@
     padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
+
     min-height:100vh;
+
     background:
         radial-gradient(
-            circle at 10% 10%,
-            rgba(57,255,136,.035),
-            transparent 30%
+            circle at 15% 10%,
+            rgba(57,255,136,.025),
+            transparent 28%
         ),
         radial-gradient(
-            circle at 90% 80%,
-            rgba(22,143,255,.035),
+            circle at 90% 90%,
+            rgba(22,143,255,.025),
             transparent 30%
         ),
         var(--bg);
 
     color:var(--text);
+
     font-family:"Vazirmatn",sans-serif;
 }
 
 
-/* ================================
-   MAIN APP
-================================ */
+/* ==========================
+   APP
+========================== */
 
 .app{
+
     width:min(760px,100%);
+
     min-height:100vh;
+
     margin:auto;
-    background:rgba(8,15,21,.55);
+
+    background:
+        rgba(8,15,21,.35);
+
 }
 
 
-/* ================================
+/* ==========================
    HEADER
-================================ */
+========================== */
 
 .header{
-    position:sticky;
-    top:0;
-    z-index:50;
 
-    height:74px;
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    height:68px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
-    padding:0 18px;
+    padding:0 15px;
 
-    background:rgba(17,27,35,.94);
+    background:
+        rgba(23,35,45,.96);
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:
+        blur(18px);
 
-    border-bottom:1px solid var(--line);
+    border-bottom:
+        1px solid var(--line);
+
 }
 
 .header-left{
+
     display:flex;
+
     align-items:center;
-    gap:12px;
+
+    gap:11px;
+
 }
 
 .avatar{
-    width:45px;
-    height:45px;
+
+    width:43px;
+
+    height:43px;
 
     border-radius:50%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     background:
         linear-gradient(
             145deg,
-            #14251d,
-            #102d22
+            #183325,
+            #10241c
         );
-
-    border:1px solid rgba(57,255,136,.2);
 
     color:var(--green);
 
-    font-size:18px;
+    font-size:17px;
+
     font-weight:800;
 
-    box-shadow:
-        0 0 20px rgba(57,255,136,.08);
+    border:
+        1px solid
+        rgba(57,255,136,.15);
+
 }
 
 .channel-name{
-    font-size:14px;
-    font-weight:800;
 
     display:flex;
+
     align-items:center;
+
     gap:5px;
+
+    font-size:13px;
+
+    font-weight:800;
+
 }
 
 .verify{
+
     width:17px;
+
     height:17px;
 
     display:inline-flex;
+
     align-items:center;
+
     justify-content:center;
 
     border-radius:50%;
 
     background:#168fff;
 
-    color:white;
+    color:#fff;
 
     font-size:9px;
 
-    box-shadow:
-        0 0 10px rgba(22,143,255,.4);
 }
 
 .channel-status{
+
     margin-top:2px;
 
     color:var(--muted);
 
-    font-size:9px;
+    font-size:8px;
+
 }
 
 .online{
+
     color:var(--green);
+
 }
-
-
-/* ================================
-   MENU
-================================ */
 
 .menu{
-    width:35px;
-    height:35px;
 
-    border-radius:50%;
+    font-size:21px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    color:#9aa9a5;
 
-    color:#9cafaa;
-
-    font-size:19px;
 }
 
 
-/* ================================
-   CHANNEL COVER
-================================ */
+/* ==========================
+   COVER
+========================== */
 
 .cover{
-    padding:28px 18px 20px;
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(22,143,255,.035),
-            transparent
-        );
+    padding:20px 16px 17px;
 
-    border-bottom:1px solid var(--line);
+    border-bottom:
+        1px solid var(--line);
+
 }
 
 .cover-title{
-    font-size:20px;
+
+    font-size:18px;
+
     font-weight:800;
 
-    margin-bottom:6px;
+    margin-bottom:5px;
+
 }
 
 .cover-description{
+
     color:var(--muted);
 
-    font-size:10px;
+    font-size:9px;
 
     line-height:2;
 
-    max-width:600px;
 }
 
 .cover-line{
-    width:50px;
+
+    width:38px;
+
     height:2px;
 
-    margin-top:14px;
+    margin-top:11px;
 
     background:var(--green);
 
     box-shadow:
-        0 0 10px rgba(57,255,136,.35);
+        0 0 9px
+        rgba(57,255,136,.3);
+
 }
 
 
-/* ================================
-   POSTS
-================================ */
+/* ==========================
+   FEED
+========================== */
 
 .feed{
-    padding:14px 10px 50px;
+
+    padding:
+        12px 8px 95px;
+
 }
 
 .post{
-    position:relative;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
-    padding:16px 16px 12px;
+    padding:
+        14px 14px 11px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(27,40,49,.98),
-            rgba(20,32,41,.98)
+            rgba(28,43,53,.98),
+            rgba(22,34,43,.98)
         );
 
-    border:1px solid rgba(255,255,255,.055);
+    border:
+        1px solid
+        rgba(255,255,255,.045);
 
-    border-radius:15px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.12);
+    border-radius:14px;
 
     animation:
-        postIn .35s ease both;
+        postIn .3s ease both;
+
 }
 
 @keyframes postIn{
 
     from{
         opacity:0;
-        transform:translateY(8px);
+        transform:translateY(5px);
     }
 
     to{
@@ -281,142 +314,541 @@ body{
 
 }
 
-.post:hover{
-    border-color:
-        rgba(57,255,136,.12);
-}
-
 .post.important{
+
     border-right:
-        2px solid var(--red);
+        2px solid
+        var(--red);
+
 }
 
 .post.update{
+
     border-right:
-        2px solid var(--blue);
+        2px solid
+        var(--blue);
+
 }
 
 .post.success{
+
     border-right:
-        2px solid var(--green);
+        2px solid
+        var(--green);
+
 }
 
-
-/* POST HEADER */
-
 .post-header{
+
     display:flex;
+
     align-items:center;
+
     gap:8px;
 
-    margin-bottom:10px;
+    margin-bottom:9px;
+
 }
 
 .post-icon{
-    width:30px;
-    height:30px;
 
-    border-radius:9px;
+    width:29px;
+
+    height:29px;
+
+    border-radius:8px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
-    background:rgba(255,255,255,.045);
+    background:
+        rgba(255,255,255,.045);
 
-    font-size:14px;
 }
 
 .post-meta{
+
     flex:1;
+
 }
 
 .post-title{
-    font-size:12px;
-    font-weight:800;
-}
-
-.post-type{
-    margin-top:2px;
-
-    font-size:8px;
-
-    color:var(--muted);
-}
-
-
-/* POST CONTENT */
-
-.post-content{
-    color:#d9e5e1;
 
     font-size:11px;
 
-    line-height:2.05;
+    font-weight:800;
+
+}
+
+.post-type{
+
+    margin-top:2px;
+
+    font-size:7px;
+
+    color:var(--muted);
+
+}
+
+.post-content{
+
+    color:#d7e2df;
+
+    font-size:10px;
+
+    line-height:2;
 
     white-space:pre-wrap;
 
     word-break:break-word;
+
 }
 
-
-/* POST FOOTER */
-
 .post-footer{
+
     display:flex;
-    justify-content:flex-end;
+
     align-items:center;
 
-    gap:6px;
+    justify-content:flex-end;
 
-    margin-top:11px;
+    gap:5px;
 
-    padding-top:9px;
+    margin-top:9px;
 
-    border-top:1px solid rgba(255,255,255,.035);
+    padding-top:8px;
 
-    color:#667a73;
+    border-top:
+        1px solid
+        rgba(255,255,255,.035);
 
-    font-size:8px;
+    color:#657670;
+
+    font-size:7px;
+
 }
 
 .check{
+
     color:#42a5ff;
-    font-size:10px;
+
 }
 
 
-/* ================================
-   LOADING
-================================ */
+/* ==========================
+   SUPPORT BUTTON
+========================== */
 
-.loading{
+.support-button{
+
+    position:fixed;
+
+    z-index:90;
+
+    bottom:18px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:min(
+        calc(100% - 24px),
+        600px
+    );
+
+    height:48px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:
+        #168fff;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    box-shadow:
+        0 8px 28px
+        rgba(0,0,0,.35),
+
+        0 0 18px
+        rgba(22,143,255,.13);
+
+    cursor:pointer;
+
+}
+
+.support-button:active{
+
+    transform:
+        translateX(-50%)
+        scale(.98);
+
+}
+
+
+/* ==========================
+   SUPPORT SCREEN
+========================== */
+
+.support-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:200;
+
+    display:none;
+
+    background:
+        var(--bg);
+
+}
+
+.support-screen.active{
+
+    display:block;
+
+}
+
+.support-app{
+
+    width:min(
+        760px,
+        100%
+    );
+
+    height:100%;
+
+    margin:auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    background:
+        #0e171e;
+
+}
+
+.support-header{
+
+    height:68px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 13px;
+
+    background:
+        #17232d;
+
+    border-bottom:
+        1px solid var(--line);
+
+}
+
+.back{
+
+    width:36px;
+
+    height:36px;
+
+    border:0;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+.support-avatar{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #183325,
+            #10241c
+        );
+
+    color:var(--green);
+
+    font-weight:800;
+
+}
+
+.support-name{
+
+    font-size:12px;
+
+    font-weight:800;
+
+}
+
+.support-online{
+
+    color:var(--green);
+
+    font-size:7px;
+
+    margin-top:2px;
+
+}
+
+
+/* ==========================
+   MESSAGES
+========================== */
+
+.messages{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:
+        16px 10px 15px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.chat-message{
+
+    max-width:82%;
+
+    padding:
+        8px 10px 6px;
+
+    border-radius:12px;
+
+    font-size:9px;
+
+    line-height:1.9;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+}
+
+.chat-message.user{
+
+    align-self:flex-start;
+
+    background:
+        #173b29;
+
+    border-bottom-left-radius:4px;
+
+}
+
+.chat-message.admin{
+
+    align-self:flex-end;
+
+    background:
+        #1c2d38;
+
+    border-bottom-right-radius:4px;
+
+}
+
+.message-time{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:4px;
+
+    margin-top:3px;
+
+    color:#748780;
+
+    font-size:6px;
+
+}
+
+.message-check{
+
+    color:#42a5ff;
+
+}
+
+
+/* ==========================
+   INPUT
+========================== */
+
+.chat-input{
+
+    padding:
+        8px;
+
+    background:
+        #17232d;
+
+    border-top:
+        1px solid var(--line);
+
+}
+
+.input-row{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:7px;
+
+}
+
+.message-input{
+
+    flex:1;
+
+    min-height:42px;
+
+    max-height:110px;
+
+    resize:none;
+
+    border:0;
+
+    outline:none;
+
+    border-radius:12px;
+
+    padding:
+        11px 12px;
+
+    background:
+        #0f1a21;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:9px;
+
+}
+
+.send-button{
+
+    width:42px;
+
+    height:42px;
+
+    flex-shrink:0;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:#168fff;
+
+    color:white;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+}
+
+.send-button:disabled{
+
+    opacity:.45;
+
+}
+
+.chat-hint{
+
+    text-align:center;
+
+    color:#596a65;
+
+    font-size:6px;
+
+    padding:
+        5px 0 1px;
+
+}
+
+
+/* ==========================
+   EMPTY / LOADING
+========================== */
+
+.loading,
+.empty{
+
     text-align:center;
 
     padding:55px 20px;
 
     color:var(--muted);
 
-    font-size:10px;
+    font-size:9px;
+
 }
 
 .loader{
-    width:25px;
-    height:25px;
 
-    margin:0 auto 12px;
+    width:24px;
+
+    height:24px;
+
+    margin:
+        0 auto 10px;
 
     border-radius:50%;
 
     border:
         2px solid
-        rgba(57,255,136,.12);
+        rgba(57,255,136,.1);
 
     border-top-color:
         var(--green);
 
     animation:
         spin .8s linear infinite;
+
 }
 
 @keyframes spin{
@@ -428,124 +860,58 @@ body{
 }
 
 
-/* ================================
-   EMPTY
-================================ */
-
-.empty{
-    text-align:center;
-
-    padding:65px 20px;
-
-    color:var(--muted);
-
-    font-size:10px;
-}
-
-.empty-icon{
-    font-size:30px;
-
-    margin-bottom:12px;
-
-    opacity:.7;
-}
-
-
-/* ================================
-   ERROR
-================================ */
-
-.error{
-    margin:20px;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    color:#ff9aac;
-
-    background:
-        rgba(255,73,105,.07);
-
-    border:
-        1px solid
-        rgba(255,73,105,.15);
-
-    font-size:9px;
-
-    line-height:1.8;
-}
-
-
-/* ================================
+/* ==========================
    FOOTER
-================================ */
+========================== */
 
 .footer{
+
     text-align:center;
 
-    padding:20px;
+    padding:18px;
 
     color:#52645e;
 
-    font-size:8px;
+    font-size:7px;
 
-    border-top:1px solid var(--line);
+    border-top:
+        1px solid var(--line);
+
 }
 
 
-/* ================================
+/* ==========================
    MOBILE
-================================ */
+========================== */
 
 @media(max-width:600px){
 
-    .header{
-        height:68px;
-        padding:0 14px;
-    }
-
-    .avatar{
-        width:41px;
-        height:41px;
-    }
-
-    .channel-name{
-        font-size:13px;
-    }
-
-    .cover{
-        padding:22px 15px 17px;
-    }
-
-    .cover-title{
-        font-size:18px;
-    }
-
     .feed{
-        padding:
-            10px 7px 40px;
+
+        padding-bottom:85px;
+
     }
 
-    .post{
-        padding:
-            14px 13px 11px;
+    .support-button{
+
+        bottom:12px;
+
     }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="app">
 
 
-<!-- ================================
-     HEADER
-================================ -->
+<!-- HEADER -->
 
 <header class="header">
 
@@ -570,6 +936,7 @@ body{
             <div class="channel-status">
 
                 کانال رسمی
+
                 <span class="online">
                     • آنلاین
                 </span>
@@ -580,7 +947,6 @@ body{
 
     </div>
 
-
     <div class="menu">
         ⋮
     </div>
@@ -588,9 +954,7 @@ body{
 </header>
 
 
-<!-- ================================
-     COVER
-================================ -->
+<!-- COVER -->
 
 <section class="cover">
 
@@ -599,9 +963,13 @@ body{
     </div>
 
     <div class="cover-description">
+
         مرجع اطلاع‌رسانی رسمی V2GURD
+
         <br>
+
         اطلاعیه‌ها، بروزرسانی‌ها و وضعیت سرویس‌ها
+
     </div>
 
     <div class="cover-line"></div>
@@ -609,9 +977,7 @@ body{
 </section>
 
 
-<!-- ================================
-     FEED
-================================ -->
+<!-- POSTS -->
 
 <main id="feed" class="feed">
 
@@ -629,7 +995,9 @@ body{
 <footer class="footer">
 
     V2GURD
-    <span style="color:#168fff;">✓</span>
+    <span style="color:#168fff;">
+        ✓
+    </span>
 
     • Official Channel
 
@@ -639,7 +1007,123 @@ body{
 </div>
 
 
+<!-- SUPPORT BUTTON -->
+
+<button
+    class="support-button"
+    onclick="openSupport()"
+>
+
+    💬 ارسال پیام به پشتیبانی
+
+</button>
+
+
+<!-- ================================
+     SUPPORT CHAT
+================================ -->
+
+<div
+    id="supportScreen"
+    class="support-screen"
+>
+
+    <div class="support-app">
+
+
+        <!-- SUPPORT HEADER -->
+
+        <div class="support-header">
+
+            <button
+                class="back"
+                onclick="closeSupport()"
+            >
+                ‹
+            </button>
+
+            <div class="support-avatar">
+                V
+            </div>
+
+            <div>
+
+                <div class="support-name">
+
+                    V2GURD Support
+                    <span class="verify">
+                        ✓
+                    </span>
+
+                </div>
+
+                <div class="support-online">
+
+                    آنلاین • پاسخ‌گویی پشتیبانی
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGES -->
+
+        <div
+            id="messages"
+            class="messages"
+        >
+
+            <div class="loading">
+
+                در حال اتصال به پشتیبانی...
+
+            </div>
+
+        </div>
+
+
+        <!-- INPUT -->
+
+        <div class="chat-input">
+
+            <div class="input-row">
+
+                <textarea
+                    id="messageInput"
+                    class="message-input"
+                    placeholder="پیام خود را بنویسید..."
+                    rows="1"
+                    maxlength="3000"
+                ></textarea>
+
+                <button
+                    id="sendButton"
+                    class="send-button"
+                    onclick="sendMessage()"
+                >
+                    ➤
+                </button>
+
+            </div>
+
+            <div class="chat-hint">
+
+                پیام شما فقط برای تیم پشتیبانی V2GURD قابل مشاهده است.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
 <script>
+
 
 /* =================================
    SUPABASE
@@ -660,16 +1144,23 @@ window.supabase.createClient(
 
 
 /* =================================
+   GLOBALS
+================================= */
+
+let currentUser = null;
+
+let currentConversation = null;
+
+let supportChannel = null;
+
+
+/* =================================
    FEED
 ================================= */
 
 const feed =
 document.getElementById("feed");
 
-
-/* =================================
-   TYPE SETTINGS
-================================= */
 
 function getPostType(type){
 
@@ -712,14 +1203,7 @@ function getPostType(type){
 }
 
 
-/* =================================
-   DATE
-================================= */
-
 function formatDate(date){
-
-    const d =
-        new Date(date);
 
     return new Intl.DateTimeFormat(
         "fa-IR",
@@ -728,19 +1212,14 @@ function formatDate(date){
             month:"2-digit",
             day:"2-digit"
         }
-    ).format(d);
+    ).format(
+        new Date(date)
+    );
 
 }
 
 
-/* =================================
-   TIME
-================================= */
-
 function formatTime(date){
-
-    const d =
-        new Date(date);
 
     return new Intl.DateTimeFormat(
         "fa-IR",
@@ -748,14 +1227,12 @@ function formatTime(date){
             hour:"2-digit",
             minute:"2-digit"
         }
-    ).format(d);
+    ).format(
+        new Date(date)
+    );
 
 }
 
-
-/* =================================
-   LOAD POSTS
-================================= */
 
 async function loadPosts(){
 
@@ -786,19 +1263,8 @@ async function loadPosts(){
         );
 
 
-        if(error){
-
-            console.error(
-                "LOAD POSTS ERROR:",
-                error
-            );
-
-            showError(
-                error.message
-            );
-
-            return;
-        }
+        if(error)
+            throw error;
 
 
         renderPosts(
@@ -810,18 +1276,24 @@ async function loadPosts(){
 
         console.error(error);
 
-        showError(
-            error.message
-        );
+        feed.innerHTML = `
+
+            <div class="empty">
+
+                ❌ دریافت اطلاعیه‌ها انجام نشد.
+
+                <br><br>
+
+                ${escapeHTML(error.message)}
+
+            </div>
+
+        `;
 
     }
 
 }
 
-
-/* =================================
-   RENDER
-================================= */
 
 function renderPosts(posts){
 
@@ -831,9 +1303,9 @@ function renderPosts(posts){
 
             <div class="empty">
 
-                <div class="empty-icon">
-                    📭
-                </div>
+                📭
+
+                <br><br>
 
                 هنوز اطلاعیه‌ای منتشر نشده است.
 
@@ -842,6 +1314,7 @@ function renderPosts(posts){
         `;
 
         return;
+
     }
 
 
@@ -869,7 +1342,7 @@ function renderPosts(posts){
 
 
             article.style.animationDelay =
-                (index * .04) + "s";
+                (index * .035) + "s";
 
 
             article.innerHTML = `
@@ -894,11 +1367,9 @@ function renderPosts(posts){
 
                 </div>
 
-
                 <div class="post-content">
                     ${escapeHTML(post.content)}
                 </div>
-
 
                 <div class="post-footer">
 
@@ -930,17 +1401,16 @@ function renderPosts(posts){
 
 
 /* =================================
-   ESCAPE HTML
+   ESCAPE
 ================================= */
 
 function escapeHTML(value){
 
-    if(value === null ||
-       value === undefined){
-
+    if(
+        value === null ||
+        value === undefined
+    )
         return "";
-
-    }
 
 
     return String(value)
@@ -974,30 +1444,636 @@ function escapeHTML(value){
 
 
 /* =================================
-   ERROR
+   OPEN SUPPORT
 ================================= */
 
-function showError(message){
+async function openSupport(){
 
-    feed.innerHTML = `
+    document
+        .getElementById(
+            "supportScreen"
+        )
+        .classList
+        .add("active");
 
-        <div class="error">
 
-            ❌ دریافت اطلاعیه‌ها انجام نشد.
-
-            <br><br>
-
-            ${escapeHTML(message)}
-
-        </div>
-
-    `;
+    await initSupport();
 
 }
 
 
 /* =================================
-   REALTIME
+   CLOSE SUPPORT
+================================= */
+
+function closeSupport(){
+
+    document
+        .getElementById(
+            "supportScreen"
+        )
+        .classList
+        .remove("active");
+
+}
+
+
+/* =================================
+   INIT SUPPORT
+================================= */
+
+async function initSupport(){
+
+    const messages =
+        document.getElementById(
+            "messages"
+        );
+
+
+    messages.innerHTML = `
+
+        <div class="loading">
+
+            <div class="loader"></div>
+
+            در حال اتصال...
+
+        </div>
+
+    `;
+
+
+    try{
+
+        /*
+         * اگر کاربر قبلاً Anonymous Session داشته،
+         * همان Session دوباره استفاده می‌شود.
+         */
+
+        const {
+            data:sessionData
+        } =
+        await supabaseClient.auth
+        .getSession();
+
+
+        if(
+            sessionData &&
+            sessionData.session
+        ){
+
+            currentUser =
+                sessionData.session.user;
+
+        }else{
+
+            const {
+                data,
+                error
+            } =
+            await supabaseClient.auth
+            .signInAnonymously();
+
+
+            if(error)
+                throw error;
+
+
+            currentUser =
+                data.user;
+
+        }
+
+
+        if(!currentUser)
+            throw new Error(
+                "شناسه کاربر ایجاد نشد."
+            );
+
+
+        await getOrCreateConversation();
+
+        await loadMessages();
+
+        subscribeToMessages();
+
+
+        setTimeout(
+            () => {
+
+                document
+                    .getElementById(
+                        "messageInput"
+                    )
+                    .focus();
+
+            },
+            100
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        messages.innerHTML = `
+
+            <div class="empty">
+
+                ❌ اتصال به پشتیبانی انجام نشد.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =================================
+   CONVERSATION
+================================= */
+
+async function getOrCreateConversation(){
+
+    const userId =
+        currentUser.id;
+
+
+    const {
+        data:existing,
+        error:findError
+    } =
+    await supabaseClient
+
+    .from(
+        "support_conversations"
+    )
+
+    .select(
+        "id,user_id,status,created_at"
+    )
+
+    .eq(
+        "user_id",
+        userId
+    )
+
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    )
+
+    .limit(1);
+
+
+    if(findError)
+        throw findError;
+
+
+    if(
+        existing &&
+        existing.length
+    ){
+
+        currentConversation =
+            existing[0];
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+
+    .from(
+        "support_conversations"
+    )
+
+    .insert({
+
+        user_id:userId,
+
+        status:"open"
+
+    })
+
+    .select()
+    .single();
+
+
+    if(error)
+        throw error;
+
+
+    currentConversation =
+        data;
+
+}
+
+
+/* =================================
+   LOAD MESSAGES
+================================= */
+
+async function loadMessages(){
+
+    const box =
+        document.getElementById(
+            "messages"
+        );
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+
+    .from(
+        "support_messages"
+    )
+
+    .select(
+        "id,conversation_id,sender,content,created_at"
+    )
+
+    .eq(
+        "conversation_id",
+        currentConversation.id
+    )
+
+    .order(
+        "created_at",
+        {
+            ascending:true
+        }
+    );
+
+
+    if(error)
+        throw error;
+
+
+    box.innerHTML = "";
+
+
+    if(
+        !data ||
+        !data.length
+    ){
+
+        box.innerHTML = `
+
+            <div class="empty">
+
+                💬
+
+                <br><br>
+
+                پیام خود را برای پشتیبانی ارسال کنید.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    data.forEach(
+        renderMessage
+    );
+
+
+    scrollMessages();
+
+}
+
+
+/* =================================
+   RENDER MESSAGE
+================================= */
+
+function renderMessage(message){
+
+    const box =
+        document.getElementById(
+            "messages"
+        );
+
+
+    const empty =
+        box.querySelector(
+            ".empty"
+        );
+
+
+    if(empty)
+        empty.remove();
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    const isUser =
+        message.sender === "user";
+
+
+    div.className =
+        "chat-message " +
+        (
+            isUser
+            ? "user"
+            : "admin"
+        );
+
+
+    div.dataset.messageId =
+        message.id;
+
+
+    div.innerHTML = `
+
+        ${escapeHTML(
+            message.content
+        )}
+
+        <div class="message-time">
+
+            ${formatTime(
+                message.created_at
+            )}
+
+            ${
+                isUser
+                ? `<span class="message-check">✓✓</span>`
+                : ""
+            }
+
+        </div>
+
+    `;
+
+
+    box.appendChild(
+        div
+    );
+
+}
+
+
+/* =================================
+   SEND MESSAGE
+================================= */
+
+async function sendMessage(){
+
+    const input =
+        document.getElementById(
+            "messageInput"
+        );
+
+    const button =
+        document.getElementById(
+            "sendButton"
+        );
+
+
+    const content =
+        input.value.trim();
+
+
+    if(!content)
+        return;
+
+
+    if(
+        !currentUser ||
+        !currentConversation
+    ){
+
+        alert(
+            "اتصال به پشتیبانی برقرار نیست."
+        );
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+
+    try{
+
+        const {
+            error
+        } =
+        await supabaseClient
+
+        .from(
+            "support_messages"
+        )
+
+        .insert({
+
+            conversation_id:
+                currentConversation.id,
+
+            sender:"user",
+
+            content:content
+
+        });
+
+
+        if(error)
+            throw error;
+
+
+        input.value = "";
+
+        input.style.height =
+            "42px";
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "ارسال پیام انجام نشد:\n" +
+            error.message
+        );
+
+    }
+
+
+    button.disabled = false;
+
+    input.focus();
+
+}
+
+
+/* =================================
+   REALTIME SUPPORT
+================================= */
+
+function subscribeToMessages(){
+
+    if(
+        supportChannel
+    ){
+
+        supabaseClient
+            .removeChannel(
+                supportChannel
+            );
+
+    }
+
+
+    supportChannel =
+        supabaseClient
+
+        .channel(
+            "support-user-" +
+            currentConversation.id
+        )
+
+        .on(
+
+            "postgres_changes",
+
+            {
+                event:"INSERT",
+
+                schema:"public",
+
+                table:"support_messages",
+
+                filter:
+                    "conversation_id=eq." +
+                    currentConversation.id
+
+            },
+
+            payload => {
+
+                const exists =
+                    document.querySelector(
+                        `[data-message-id="${payload.new.id}"]`
+                    );
+
+
+                if(!exists){
+
+                    renderMessage(
+                        payload.new
+                    );
+
+                    scrollMessages();
+
+                }
+
+            }
+
+        )
+
+        .subscribe();
+
+}
+
+
+/* =================================
+   SCROLL
+================================= */
+
+function scrollMessages(){
+
+    const box =
+        document.getElementById(
+            "messages"
+        );
+
+
+    box.scrollTop =
+        box.scrollHeight;
+
+}
+
+
+/* =================================
+   INPUT AUTO RESIZE
+================================= */
+
+document
+    .getElementById(
+        "messageInput"
+    )
+    .addEventListener(
+        "input",
+        function(){
+
+            this.style.height =
+                "42px";
+
+            this.style.height =
+                Math.min(
+                    this.scrollHeight,
+                    110
+                ) + "px";
+
+        }
+    );
+
+
+/* ENTER SEND */
+
+document
+    .getElementById(
+        "messageInput"
+    )
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(
+                event.key === "Enter" &&
+                !event.shiftKey
+            ){
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+/* =================================
+   POST REALTIME
 ================================= */
 
 supabaseClient
@@ -1012,16 +2088,14 @@ supabaseClient
 
     {
         event:"*",
+
         schema:"public",
+
         table:"posts"
+
     },
 
-    payload => {
-
-        console.log(
-            "Realtime update:",
-            payload
-        );
+    () => {
 
         loadPosts();
 
@@ -1033,7 +2107,7 @@ supabaseClient
 
 
 /* =================================
-   INITIAL LOAD
+   INITIAL
 ================================= */
 
 loadPosts();
@@ -1041,4 +2115,5 @@ loadPosts();
 </script>
 
 </body>
+
 </html>
