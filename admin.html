@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>V2GURD Admin</title>
 
@@ -12,14 +12,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 
 :root{
+    --bg:#020608;
+    --card:rgba(8,18,23,.9);
     --green:#39ff88;
     --blue:#168fff;
     --red:#ff4164;
-    --bg:#020608;
-    --card:rgba(7,18,23,.86);
-    --border:rgba(57,255,136,.15);
+    --yellow:#ffd45c;
     --text:#effff6;
     --muted:#71877e;
+    --border:rgba(57,255,136,.13);
 }
 
 *{
@@ -30,62 +31,63 @@
 
 body{
     min-height:100vh;
-    background:#020608;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(57,255,136,.06),transparent 30%),
+        radial-gradient(circle at 90% 90%,rgba(22,143,255,.06),transparent 30%),
+        var(--bg);
     color:var(--text);
     font-family:"Vazirmatn",sans-serif;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-3;
-    background:
-        linear-gradient(rgba(57,255,136,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(33,150,255,.025) 1px,transparent 1px);
-    background-size:45px 45px;
+.container{
+    width:min(760px,calc(100% - 18px));
+    margin:auto;
+    padding:25px 0 60px;
 }
 
 .glow{
     position:fixed;
-    width:400px;
-    height:400px;
+    width:350px;
+    height:350px;
     border-radius:50%;
     filter:blur(120px);
-    opacity:.12;
-    z-index:-2;
+    opacity:.08;
     pointer-events:none;
+    z-index:-1;
 }
 
-.green{
-    background:#39ff88;
-    top:-180px;
+.g1{
+    background:var(--green);
+    top:-150px;
     right:-150px;
 }
 
-.blue{
-    background:#168fff;
-    bottom:-180px;
+.g2{
+    background:var(--blue);
+    bottom:-150px;
     left:-150px;
-}
-
-.container{
-    width:min(700px,calc(100% - 20px));
-    margin:auto;
-    padding:30px 0 60px;
 }
 
 .card{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:22px;
-    padding:22px;
-    backdrop-filter:blur(20px);
-    margin-bottom:16px;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:15px;
+    backdrop-filter:blur(18px);
 }
 
-.logo{
-    font-size:21px;
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:18px;
+    margin-bottom:22px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.brand{
+    font-size:20px;
     font-weight:800;
 }
 
@@ -99,58 +101,40 @@ body::before{
     background:#168fff;
     color:#fff;
     font-size:10px;
-    box-shadow:0 0 15px rgba(22,143,255,.6);
-}
-
-.header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding-bottom:18px;
-    margin-bottom:24px;
-    border-bottom:1px solid var(--border);
+    box-shadow:0 0 13px rgba(22,143,255,.45);
 }
 
 .status{
-    display:flex;
-    align-items:center;
-    gap:7px;
     color:var(--green);
-    font-size:9px;
-    margin-top:5px;
+    font-size:8px;
+    margin-top:4px;
 }
 
 .dot{
-    width:7px;
-    height:7px;
+    display:inline-block;
+    width:6px;
+    height:6px;
     border-radius:50%;
     background:var(--green);
-    box-shadow:0 0 12px var(--green);
+    box-shadow:0 0 10px var(--green);
+    margin-left:4px;
 }
 
-.login{
-    max-width:420px;
-    margin:70px auto;
-}
-
-.login-logo{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.login-title{
-    text-align:center;
+h1{
     font-size:23px;
-    font-weight:800;
-    margin-top:12px;
+    margin-bottom:5px;
 }
 
-.login-subtitle{
-    text-align:center;
+.subtitle{
     color:var(--muted);
     font-size:9px;
-    margin-top:6px;
-    margin-bottom:22px;
+    margin-bottom:23px;
+}
+
+.card-title{
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:17px;
 }
 
 label{
@@ -164,192 +148,285 @@ input,
 textarea,
 select{
     width:100%;
-    outline:none;
-    color:white;
-    background:rgba(0,0,0,.32);
+    background:rgba(0,0,0,.3);
     border:1px solid rgba(255,255,255,.07);
-    border-radius:12px;
-    padding:13px;
-    margin-bottom:15px;
+    color:#fff;
+    border-radius:11px;
+    outline:none;
+    padding:12px;
+    margin-bottom:14px;
     font-family:inherit;
-    font-size:11px;
+    font-size:10px;
 }
 
 textarea{
-    min-height:150px;
+    min-height:135px;
     resize:vertical;
 }
 
 input:focus,
 textarea:focus,
 select:focus{
-    border-color:rgba(57,255,136,.45);
-    box-shadow:0 0 20px rgba(57,255,136,.07);
+    border-color:rgba(57,255,136,.35);
 }
 
 button{
     font-family:inherit;
+    cursor:pointer;
 }
 
 .primary{
     width:100%;
-    border:none;
-    border-radius:12px;
+    border:0;
+    border-radius:11px;
     padding:13px;
     background:var(--green);
     color:#001108;
-    font-size:11px;
     font-weight:800;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.primary:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 25px rgba(57,255,136,.2);
+    font-size:10px;
 }
 
 .primary:disabled{
     opacity:.55;
     cursor:not-allowed;
-    transform:none;
-}
-
-.logout{
-    padding:8px 13px;
-    border-radius:10px;
-    background:rgba(255,65,100,.08);
-    border:1px solid rgba(255,65,100,.2);
-    color:var(--red);
-    cursor:pointer;
-    font-size:9px;
-}
-
-.admin-title{
-    font-size:25px;
-    font-weight:800;
-}
-
-.admin-subtitle{
-    color:var(--muted);
-    font-size:9px;
-    margin-top:5px;
-    margin-bottom:25px;
-}
-
-.card-title{
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:18px;
 }
 
 .message{
     display:none;
-    margin-top:13px;
     padding:11px;
-    border-radius:11px;
+    border-radius:10px;
+    margin-top:12px;
     font-size:9px;
-    line-height:1.9;
-    word-break:break-word;
+    line-height:1.8;
 }
 
 .message.show{
     display:block;
 }
 
-.message.error{
-    color:#ff9bad;
-    background:rgba(255,65,100,.07);
-    border:1px solid rgba(255,65,100,.15);
-}
-
 .message.success{
     color:var(--green);
     background:rgba(57,255,136,.06);
-    border:1px solid rgba(57,255,136,.12);
+    border:1px solid rgba(57,255,136,.13);
+}
+
+.message.error{
+    color:#ff9bad;
+    background:rgba(255,65,100,.06);
+    border:1px solid rgba(255,65,100,.13);
 }
 
 .message.info{
-    color:#7dbdff;
-    background:rgba(33,150,255,.06);
-    border:1px solid rgba(33,150,255,.12);
+    color:#79b9ff;
+    background:rgba(22,143,255,.06);
+    border:1px solid rgba(22,143,255,.13);
 }
 
-.bottom-link{
-    display:block;
+.logout{
+    border:1px solid rgba(255,65,100,.18);
+    background:rgba(255,65,100,.06);
+    color:var(--red);
+    padding:8px 12px;
+    border-radius:9px;
+    font-size:8px;
+}
+
+
+/* POSTS */
+
+.posts-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.refresh{
+    border:1px solid rgba(57,255,136,.15);
+    background:rgba(57,255,136,.05);
+    color:var(--green);
+    padding:7px 10px;
+    border-radius:8px;
+    font-size:8px;
+}
+
+.post{
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:10px;
+}
+
+.post.hidden{
+    opacity:.48;
+    border-color:rgba(255,212,92,.15);
+}
+
+.post-top{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.post-info{
+    flex:1;
+}
+
+.post-title{
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:4px;
+}
+
+.post-date{
+    color:var(--muted);
+    font-size:8px;
+}
+
+.post-content{
+    color:#b9c8c3;
+    font-size:9px;
+    line-height:1.9;
+    margin-top:10px;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 7px;
+    border-radius:7px;
+    font-size:7px;
+    margin-top:8px;
+}
+
+.badge-visible{
+    color:var(--green);
+    background:rgba(57,255,136,.07);
+}
+
+.badge-hidden{
+    color:var(--yellow);
+    background:rgba(255,212,92,.07);
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+    padding-top:10px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+
+.action{
+    flex:1;
+    border-radius:8px;
+    padding:9px 5px;
+    font-size:8px;
+    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.025);
+    color:#c7d2ce;
+}
+
+.action.hide{
+    color:var(--yellow);
+    border-color:rgba(255,212,92,.12);
+}
+
+.action.show{
+    color:var(--green);
+    border-color:rgba(57,255,136,.12);
+}
+
+.action.delete{
+    color:var(--red);
+    border-color:rgba(255,65,100,.12);
+}
+
+.empty{
     text-align:center;
     color:var(--muted);
-    text-decoration:none;
     font-size:9px;
-    margin-top:18px;
+    padding:35px 10px;
 }
 
-.bottom-link:hover{
-    color:var(--green);
+.login{
+    max-width:420px;
+    margin:70px auto;
 }
 
-.debug{
-    margin-top:15px;
-    padding:10px;
-    border-radius:10px;
-    background:rgba(0,0,0,.25);
-    color:#52645e;
+.login-title{
+    text-align:center;
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.login-sub{
+    text-align:center;
+    color:var(--muted);
     font-size:8px;
-    direction:ltr;
-    text-align:left;
-    display:none;
-    word-break:break-all;
+    margin-bottom:22px;
 }
 
 @media(max-width:600px){
+
     .container{
-        width:calc(100% - 16px);
+        width:calc(100% - 12px);
     }
 
     .card{
-        padding:17px;
+        padding:16px;
     }
 
-    .admin-title{
-        font-size:22px;
+    .actions{
+        gap:5px;
     }
+
+    .action{
+        font-size:7px;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="glow green"></div>
-<div class="glow blue"></div>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
 
 <div class="container">
 
 <!-- LOGIN -->
+
 <section id="loginSection" class="login">
 
     <div class="card">
 
-        <div class="login-logo">
-            <div class="logo">
+        <div style="text-align:center;margin-bottom:20px;">
+
+            <div class="brand">
                 V2GURD
                 <span class="verify">✓</span>
             </div>
 
             <div class="login-title">
-                🔐 ورود مدیریت
+                🔐 مدیریت کانال
             </div>
 
-            <div class="login-subtitle">
+            <div class="login-sub">
                 V2GURD CONTROL CENTER
             </div>
+
         </div>
 
-        <label>ایمیل مدیریت</label>
+        <label>ایمیل</label>
 
         <input
             id="email"
             type="email"
-            autocomplete="email"
             placeholder="admin@example.com"
         >
 
@@ -358,7 +435,6 @@ button{
         <input
             id="password"
             type="password"
-            autocomplete="current-password"
             placeholder="••••••••"
         >
 
@@ -367,7 +443,7 @@ button{
             class="primary"
             onclick="login()"
         >
-            ورود به پنل
+            ورود
         </button>
 
         <div id="loginMessage" class="message"></div>
@@ -378,13 +454,14 @@ button{
 
 
 <!-- ADMIN -->
+
 <section id="adminSection" style="display:none;">
 
     <div class="header">
 
         <div>
 
-            <div class="logo">
+            <div class="brand">
                 V2GURD
                 <span class="verify">✓</span>
             </div>
@@ -406,19 +483,21 @@ button{
     </div>
 
 
-    <div class="admin-title">
-        مدیریت اطلاعیه‌ها
+    <h1>
+        مدیریت کانال
+    </h1>
+
+    <div class="subtitle">
+        انتشار و مدیریت اطلاعیه‌های V2GURD
     </div>
 
-    <div class="admin-subtitle">
-        انتشار مستقیم اطلاعیه برای کانال V2GURD
-    </div>
 
+    <!-- NEW POST -->
 
     <div class="card">
 
         <div class="card-title">
-            📢 اطلاعیه جدید
+            📢 انتشار اطلاعیه جدید
         </div>
 
         <label>عنوان</label>
@@ -426,7 +505,7 @@ button{
         <input
             id="title"
             type="text"
-            placeholder="مثلاً: بروزرسانی سرورها"
+            placeholder="عنوان اطلاعیه..."
         >
 
         <label>نوع اطلاعیه</label>
@@ -451,11 +530,11 @@ button{
 
         </select>
 
-        <label>متن اطلاعیه</label>
+        <label>متن</label>
 
         <textarea
             id="content"
-            placeholder="متن اطلاعیه را بنویس..."
+            placeholder="متن اطلاعیه..."
         ></textarea>
 
         <button
@@ -468,17 +547,37 @@ button{
 
         <div id="publishMessage" class="message"></div>
 
-        <div id="debugBox" class="debug"></div>
-
     </div>
 
 
-    <a
-        href="./index.html"
-        class="bottom-link"
-    >
-        ← مشاهده کانال V2GURD
-    </a>
+    <!-- POSTS -->
+
+    <div class="card">
+
+        <div class="posts-header">
+
+            <div class="card-title" style="margin:0;">
+                📋 اطلاعیه‌ها
+            </div>
+
+            <button
+                class="refresh"
+                onclick="loadPosts()"
+            >
+                ↻ بروزرسانی
+            </button>
+
+        </div>
+
+        <div id="postsList">
+
+            <div class="empty">
+                در حال دریافت اطلاعیه‌ها...
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -487,9 +586,9 @@ button{
 
 <script>
 
-/* ================================
+/* =================================
    SUPABASE
-================================ */
+================================= */
 
 const SUPABASE_URL =
 "https://dymfrorzgmmsbvazsvnb.supabase.co";
@@ -504,15 +603,11 @@ window.supabase.createClient(
 );
 
 
-/* ================================
-   MESSAGE
-================================ */
+/* =================================
+   HELPERS
+================================= */
 
-function showMessage(
-    id,
-    text,
-    type
-){
+function showMessage(id,text,type){
 
     const el =
         document.getElementById(id);
@@ -524,9 +619,46 @@ function showMessage(
 }
 
 
-/* ================================
+function escapeHTML(value){
+
+    if(value === null ||
+       value === undefined){
+
+        return "";
+
+    }
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+function formatDate(date){
+
+    const d =
+        new Date(date);
+
+    return new Intl.DateTimeFormat(
+        "fa-IR",
+        {
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    ).format(d);
+}
+
+
+/* =================================
    LOGIN
-================================ */
+================================= */
 
 async function login(){
 
@@ -573,43 +705,40 @@ async function login(){
         await supabaseClient.auth
         .signInWithPassword({
 
-            email:email,
-
-            password:password
+            email,
+            password
 
         });
 
 
-        if(error){
-
+        if(error)
             throw error;
 
-        }
 
-
-        if(!data.session){
-
+        if(!data.session)
             throw new Error(
-                "Session ایجاد نشد."
+                "نشست مدیریت ایجاد نشد."
             );
 
-        }
+
+        document.getElementById(
+            "loginSection"
+        ).style.display = "none";
 
 
-        showAdmin();
+        document.getElementById(
+            "adminSection"
+        ).style.display = "block";
+
+
+        await loadPosts();
 
 
     }catch(error){
 
-        console.error(
-            "LOGIN ERROR:",
-            error
-        );
-
         showMessage(
             "loginMessage",
-            "❌ ورود ناموفق: " +
-            error.message,
+            "❌ " + error.message,
             "error"
         );
 
@@ -619,73 +748,47 @@ async function login(){
     button.disabled = false;
 
     button.textContent =
-        "ورود به پنل";
+        "ورود";
 }
 
 
-/* ================================
-   SHOW ADMIN
-================================ */
-
-function showAdmin(){
-
-    document.getElementById(
-        "loginSection"
-    ).style.display = "none";
-
-    document.getElementById(
-        "adminSection"
-    ).style.display = "block";
-}
-
-
-/* ================================
-   CHECK SESSION
-================================ */
+/* =================================
+   SESSION
+================================= */
 
 async function checkSession(){
 
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await supabaseClient.auth
-        .getSession();
+    const {
+        data
+    } =
+    await supabaseClient.auth
+    .getSession();
 
 
-        if(error){
+    if(
+        data &&
+        data.session
+    ){
 
-            console.error(
-                "SESSION ERROR:",
-                error
-            );
-
-            return;
-        }
+        document.getElementById(
+            "loginSection"
+        ).style.display = "none";
 
 
-        if(
-            data &&
-            data.session
-        ){
+        document.getElementById(
+            "adminSection"
+        ).style.display = "block";
 
-            showAdmin();
 
-        }
-
-    }catch(error){
-
-        console.error(error);
+        loadPosts();
 
     }
 }
 
 
-/* ================================
+/* =================================
    LOGOUT
-================================ */
+================================= */
 
 async function logout(){
 
@@ -695,9 +798,9 @@ async function logout(){
 }
 
 
-/* ================================
+/* =================================
    PUBLISH
-================================ */
+================================= */
 
 async function publishPost(){
 
@@ -738,7 +841,7 @@ async function publishPost(){
 
         showMessage(
             "publishMessage",
-            "⚠️ متن اطلاعیه را وارد کن.",
+            "⚠️ متن را وارد کن.",
             "error"
         );
 
@@ -752,30 +855,13 @@ async function publishPost(){
         "در حال انتشار...";
 
 
-    showMessage(
-        "publishMessage",
-        "⏳ در حال اتصال به دیتابیس...",
-        "info"
-    );
-
-
     try{
 
-        /* GET SESSION */
-
         const {
-            data:sessionData,
-            error:sessionError
+            data:sessionData
         } =
         await supabaseClient.auth
         .getSession();
-
-
-        if(sessionError){
-
-            throw sessionError;
-
-        }
 
 
         if(
@@ -784,13 +870,11 @@ async function publishPost(){
         ){
 
             throw new Error(
-                "نشست مدیریت وجود ندارد. دوباره وارد شوید."
+                "نشست مدیریت منقضی شده است."
             );
 
         }
 
-
-        /* INSERT */
 
         const {
             data,
@@ -801,11 +885,8 @@ async function publishPost(){
         .insert({
 
             title:title,
-
             content:content,
-
             type:type,
-
             published:true
 
         })
@@ -813,29 +894,13 @@ async function publishPost(){
         .single();
 
 
-        console.log(
-            "SUPABASE DATA:",
-            data
-        );
-
-        console.log(
-            "SUPABASE ERROR:",
-            error
-        );
-
-
-        if(error){
-
+        if(error)
             throw error;
 
-        }
-
-
-        /* SUCCESS */
 
         showMessage(
             "publishMessage",
-            "✅ پست واقعاً داخل دیتابیس ثبت شد.",
+            "✅ اطلاعیه منتشر شد.",
             "success"
         );
 
@@ -844,53 +909,22 @@ async function publishPost(){
             "title"
         ).value = "";
 
+
         document.getElementById(
             "content"
         ).value = "";
 
 
-        document.getElementById(
-            "debugBox"
-        ).style.display = "block";
-
-        document.getElementById(
-            "debugBox"
-        ).textContent =
-            "POST ID: " +
-            data.id +
-            " | CREATED: " +
-            data.created_at;
+        await loadPosts();
 
 
     }catch(error){
 
-        console.error(
-            "PUBLISH ERROR:",
-            error
-        );
-
-
-        document.getElementById(
-            "debugBox"
-        ).style.display = "block";
-
-        document.getElementById(
-            "debugBox"
-        ).textContent =
-            JSON.stringify(
-                error,
-                null,
-                2
-            );
-
+        console.error(error);
 
         showMessage(
             "publishMessage",
-            "❌ انتشار ناموفق: " +
-            (
-                error.message ||
-                "خطای ناشناخته"
-            ),
+            "❌ " + error.message,
             "error"
         );
 
@@ -904,9 +938,332 @@ async function publishPost(){
 }
 
 
-/* ================================
+/* =================================
+   LOAD POSTS
+================================= */
+
+async function loadPosts(){
+
+    const list =
+        document.getElementById(
+            "postsList"
+        );
+
+
+    list.innerHTML = `
+        <div class="empty">
+            ⏳ در حال دریافت...
+        </div>
+    `;
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+
+        .from("posts")
+
+        .select(
+            "id,title,content,type,created_at,published"
+        )
+
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+        if(error)
+            throw error;
+
+
+        renderPosts(
+            data || []
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        list.innerHTML = `
+            <div class="empty" style="color:#ff8095;">
+                ❌ ${escapeHTML(error.message)}
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =================================
+   RENDER POSTS
+================================= */
+
+function renderPosts(posts){
+
+    const list =
+        document.getElementById(
+            "postsList"
+        );
+
+
+    if(!posts.length){
+
+        list.innerHTML = `
+            <div class="empty">
+                📭 هنوز اطلاعیه‌ای وجود ندارد.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    posts.forEach(post => {
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "post " +
+            (
+                post.published
+                ? ""
+                : "hidden"
+            );
+
+
+        const status =
+            post.published
+
+            ? `
+                <span class="badge badge-visible">
+                    ● در سایت نمایش داده می‌شود
+                </span>
+              `
+
+            : `
+                <span class="badge badge-hidden">
+                    ● مخفی از سایت
+                </span>
+              `;
+
+
+        const toggleButton =
+            post.published
+
+            ? `
+                <button
+                    class="action hide"
+                    onclick="togglePost(${post.id},false)"
+                >
+                    👁 مخفی کردن
+                </button>
+              `
+
+            : `
+                <button
+                    class="action show"
+                    onclick="togglePost(${post.id},true)"
+                >
+                    👁 نمایش دوباره
+                </button>
+              `;
+
+
+        item.innerHTML = `
+
+            <div class="post-top">
+
+                <div class="post-info">
+
+                    <div class="post-title">
+                        ${escapeHTML(post.title)}
+                    </div>
+
+                    <div class="post-date">
+                        ${formatDate(post.created_at)}
+                    </div>
+
+                </div>
+
+            </div>
+
+            ${status}
+
+            <div class="post-content">
+                ${escapeHTML(post.content)}
+            </div>
+
+            <div class="actions">
+
+                ${toggleButton}
+
+                <button
+                    class="action delete"
+                    onclick="deletePost(${post.id})"
+                >
+                    🗑 حذف دائمی
+                </button>
+
+            </div>
+        `;
+
+
+        list.appendChild(item);
+
+    });
+
+}
+
+
+/* =================================
+   HIDE / SHOW
+================================= */
+
+async function togglePost(
+    id,
+    published
+){
+
+    try{
+
+        const {
+            error
+        } =
+        await supabaseClient
+
+        .from("posts")
+
+        .update({
+            published:published
+        })
+
+        .eq(
+            "id",
+            id
+        );
+
+
+        if(error)
+            throw error;
+
+
+        await loadPosts();
+
+
+    }catch(error){
+
+        alert(
+            "خطا: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =================================
+   DELETE
+================================= */
+
+async function deletePost(id){
+
+    const confirmed =
+        confirm(
+            "⚠️ این اطلاعیه برای همیشه حذف می‌شود.\n\nمطمئنی؟"
+        );
+
+
+    if(!confirmed)
+        return;
+
+
+    try{
+
+        const {
+            error
+        } =
+        await supabaseClient
+
+        .from("posts")
+
+        .delete()
+
+        .eq(
+            "id",
+            id
+        );
+
+
+        if(error)
+            throw error;
+
+
+        await loadPosts();
+
+
+    }catch(error){
+
+        alert(
+            "❌ حذف انجام نشد:\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =================================
+   REALTIME
+================================= */
+
+supabaseClient
+
+.channel(
+    "admin-posts"
+)
+
+.on(
+
+    "postgres_changes",
+
+    {
+        event:"*",
+        schema:"public",
+        table:"posts"
+    },
+
+    () => {
+
+        loadPosts();
+
+    }
+
+)
+
+.subscribe();
+
+
+/* =================================
    START
-================================ */
+================================= */
 
 checkSession();
 
