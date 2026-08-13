@@ -13,7 +13,7 @@
 
 :root{
     --bg:#020608;
-    --card:rgba(8,18,23,.9);
+    --card:rgba(8,18,23,.92);
     --green:#39ff88;
     --blue:#168fff;
     --red:#ff4164;
@@ -37,6 +37,11 @@ body{
         var(--bg);
     color:var(--text);
     font-family:"Vazirmatn",sans-serif;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
 }
 
 .container{
@@ -170,11 +175,6 @@ select:focus{
     border-color:rgba(57,255,136,.35);
 }
 
-button{
-    font-family:inherit;
-    cursor:pointer;
-}
-
 .primary{
     width:100%;
     border:0;
@@ -216,12 +216,6 @@ button{
     border:1px solid rgba(255,65,100,.13);
 }
 
-.message.info{
-    color:#79b9ff;
-    background:rgba(22,143,255,.06);
-    border:1px solid rgba(22,143,255,.13);
-}
-
 .logout{
     border:1px solid rgba(255,65,100,.18);
     background:rgba(255,65,100,.06);
@@ -232,7 +226,51 @@ button{
 }
 
 
-/* POSTS */
+/* =========================
+   ADMIN TABS
+========================= */
+
+.tabs{
+    display:flex;
+    gap:7px;
+    margin-bottom:15px;
+}
+
+.tab{
+    flex:1;
+    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.025);
+    color:#8ea09a;
+    border-radius:11px;
+    padding:11px 7px;
+    font-size:9px;
+}
+
+.tab.active{
+    color:#001108;
+    background:var(--green);
+    border-color:var(--green);
+    font-weight:800;
+}
+
+.tab .count{
+    display:inline-flex;
+    min-width:17px;
+    height:17px;
+    align-items:center;
+    justify-content:center;
+    margin-right:4px;
+    padding:0 4px;
+    border-radius:50px;
+    background:var(--red);
+    color:white;
+    font-size:7px;
+}
+
+
+/* =========================
+   POSTS
+========================= */
 
 .posts-header{
     display:flex;
@@ -261,16 +299,6 @@ button{
 .post.hidden{
     opacity:.48;
     border-color:rgba(255,212,92,.15);
-}
-
-.post-top{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-}
-
-.post-info{
-    flex:1;
 }
 
 .post-title{
@@ -331,43 +359,253 @@ button{
 
 .action.hide{
     color:var(--yellow);
-    border-color:rgba(255,212,92,.12);
 }
 
 .action.show{
     color:var(--green);
-    border-color:rgba(57,255,136,.12);
 }
 
 .action.delete{
     color:var(--red);
-    border-color:rgba(255,65,100,.12);
 }
 
-.empty{
-    text-align:center;
-    color:var(--muted);
-    font-size:9px;
-    padding:35px 10px;
+
+/* =========================
+   SUPPORT
+========================= */
+
+.support-layout{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:10px;
 }
 
-.login{
-    max-width:420px;
-    margin:70px auto;
+.conversations{
+    min-height:520px;
+    max-height:650px;
+    overflow-y:auto;
+    padding:8px;
+    background:rgba(0,0,0,.18);
+    border-radius:14px;
 }
 
-.login-title{
-    text-align:center;
-    font-size:24px;
+.conversation{
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:6px;
+    border:1px solid transparent;
+    background:rgba(255,255,255,.025);
+    cursor:pointer;
+}
+
+.conversation:hover{
+    background:rgba(57,255,136,.04);
+}
+
+.conversation.active{
+    border-color:rgba(57,255,136,.18);
+    background:rgba(57,255,136,.05);
+}
+
+.conversation-top{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.user-avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#122a20;
+    color:var(--green);
+    font-size:10px;
     font-weight:800;
-    margin-bottom:5px;
 }
 
-.login-sub{
+.conversation-info{
+    flex:1;
+    min-width:0;
+}
+
+.user-name{
+    font-size:9px;
+    font-weight:800;
+}
+
+.last-message{
+    color:var(--muted);
+    font-size:7px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-top:3px;
+}
+
+.conversation-time{
+    color:var(--muted);
+    font-size:6px;
+}
+
+.unread{
+    display:inline-flex;
+    min-width:17px;
+    height:17px;
+    align-items:center;
+    justify-content:center;
+    padding:0 4px;
+    border-radius:50px;
+    background:var(--red);
+    color:white;
+    font-size:6px;
+    margin-top:4px;
+}
+
+
+/* CHAT */
+
+.chat{
+    min-height:520px;
+    height:650px;
+    display:flex;
+    flex-direction:column;
+    background:rgba(0,0,0,.18);
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.chat-header{
+    min-height:58px;
+    padding:10px 13px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    background:rgba(23,35,45,.9);
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.chat-title{
+    font-size:10px;
+    font-weight:800;
+}
+
+.chat-subtitle{
+    color:var(--muted);
+    font-size:6px;
+    margin-top:3px;
+}
+
+.chat-messages{
+    flex:1;
+    overflow-y:auto;
+    padding:14px 10px;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.chat-empty{
+    margin:auto;
     text-align:center;
     color:var(--muted);
     font-size:8px;
-    margin-bottom:22px;
+    line-height:2;
+}
+
+.chat-message{
+    max-width:80%;
+    padding:8px 10px 6px;
+    border-radius:12px;
+    font-size:8px;
+    line-height:1.9;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.chat-message.user{
+    align-self:flex-start;
+    background:#173b29;
+    border-bottom-left-radius:4px;
+}
+
+.chat-message.admin{
+    align-self:flex-end;
+    background:#1c2d38;
+    border-bottom-right-radius:4px;
+}
+
+.message-time{
+    display:flex;
+    justify-content:flex-end;
+    gap:4px;
+    color:#6f817b;
+    font-size:5px;
+    margin-top:3px;
+}
+
+.reply-box{
+    display:flex;
+    gap:7px;
+    padding:8px;
+    background:#17232d;
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.reply-input{
+    flex:1;
+    min-height:40px;
+    max-height:100px;
+    resize:none;
+    margin:0;
+    background:#0c151c;
+}
+
+.reply-button{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:10px;
+    background:var(--blue);
+    color:white;
+    font-size:15px;
+}
+
+.reply-button:disabled{
+    opacity:.5;
+}
+
+.close-conversation{
+    border:1px solid rgba(255,212,92,.13);
+    background:rgba(255,212,92,.05);
+    color:var(--yellow);
+    padding:7px 9px;
+    border-radius:8px;
+    font-size:7px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:650px){
+
+    .support-layout{
+        grid-template-columns:1fr;
+    }
+
+    .conversations{
+        min-height:auto;
+        max-height:280px;
+    }
+
+    .chat{
+        height:580px;
+    }
+
 }
 
 @media(max-width:600px){
@@ -401,9 +639,9 @@ button{
 
 <!-- LOGIN -->
 
-<section id="loginSection" class="login">
+<section id="loginSection">
 
-    <div class="card">
+    <div class="login card">
 
         <div style="text-align:center;margin-bottom:20px;">
 
@@ -412,11 +650,11 @@ button{
                 <span class="verify">✓</span>
             </div>
 
-            <div class="login-title">
+            <div style="font-size:24px;font-weight:800;margin:8px 0 5px;">
                 🔐 مدیریت کانال
             </div>
 
-            <div class="login-sub">
+            <div style="color:var(--muted);font-size:8px;">
                 V2GURD CONTROL CENTER
             </div>
 
@@ -484,95 +722,252 @@ button{
 
 
     <h1>
-        مدیریت کانال
+        مدیریت V2GURD
     </h1>
 
     <div class="subtitle">
-        انتشار و مدیریت اطلاعیه‌های V2GURD
+        مدیریت کانال و پشتیبانی کاربران
     </div>
 
 
-    <!-- NEW POST -->
+    <!-- TABS -->
 
-    <div class="card">
-
-        <div class="card-title">
-            📢 انتشار اطلاعیه جدید
-        </div>
-
-        <label>عنوان</label>
-
-        <input
-            id="title"
-            type="text"
-            placeholder="عنوان اطلاعیه..."
-        >
-
-        <label>نوع اطلاعیه</label>
-
-        <select id="type">
-
-            <option value="normal">
-                📢 اطلاعیه عادی
-            </option>
-
-            <option value="important">
-                🚨 اطلاعیه مهم
-            </option>
-
-            <option value="update">
-                🛠️ بروزرسانی
-            </option>
-
-            <option value="success">
-                🟢 وضعیت پایدار
-            </option>
-
-        </select>
-
-        <label>متن</label>
-
-        <textarea
-            id="content"
-            placeholder="متن اطلاعیه..."
-        ></textarea>
+    <div class="tabs">
 
         <button
-            id="publishButton"
-            class="primary"
-            onclick="publishPost()"
+            id="postsTab"
+            class="tab active"
+            onclick="showTab('posts')"
         >
-            🚀 انتشار اطلاعیه
+            📢 اطلاعیه‌ها
         </button>
 
-        <div id="publishMessage" class="message"></div>
+        <button
+            id="supportTab"
+            class="tab"
+            onclick="showTab('support')"
+        >
+            💬 پشتیبانی
+            <span
+                id="unreadCount"
+                class="count"
+                style="display:none;"
+            >
+                0
+            </span>
+        </button>
 
     </div>
 
 
-    <!-- POSTS -->
+    <!-- ======================
+         POSTS SECTION
+    ======================= -->
 
-    <div class="card">
+    <div id="postsSection">
 
-        <div class="posts-header">
+        <!-- NEW POST -->
 
-            <div class="card-title" style="margin:0;">
-                📋 اطلاعیه‌ها
+        <div class="card">
+
+            <div class="card-title">
+                📢 انتشار اطلاعیه جدید
             </div>
 
-            <button
-                class="refresh"
-                onclick="loadPosts()"
+            <label>عنوان</label>
+
+            <input
+                id="title"
+                type="text"
+                placeholder="عنوان اطلاعیه..."
             >
-                ↻ بروزرسانی
+
+            <label>نوع اطلاعیه</label>
+
+            <select id="type">
+
+                <option value="normal">
+                    📢 اطلاعیه عادی
+                </option>
+
+                <option value="important">
+                    🚨 اطلاعیه مهم
+                </option>
+
+                <option value="update">
+                    🛠️ بروزرسانی
+                </option>
+
+                <option value="success">
+                    🟢 وضعیت پایدار
+                </option>
+
+            </select>
+
+            <label>متن</label>
+
+            <textarea
+                id="content"
+                placeholder="متن اطلاعیه..."
+            ></textarea>
+
+            <button
+                id="publishButton"
+                class="primary"
+                onclick="publishPost()"
+            >
+                🚀 انتشار اطلاعیه
             </button>
+
+            <div id="publishMessage" class="message"></div>
 
         </div>
 
-        <div id="postsList">
 
-            <div class="empty">
-                در حال دریافت اطلاعیه‌ها...
+        <!-- POSTS -->
+
+        <div class="card">
+
+            <div class="posts-header">
+
+                <div class="card-title" style="margin:0;">
+                    📋 اطلاعیه‌ها
+                </div>
+
+                <button
+                    class="refresh"
+                    onclick="loadPosts()"
+                >
+                    ↻ بروزرسانی
+                </button>
+
+            </div>
+
+            <div id="postsList">
+
+                <div class="empty">
+                    در حال دریافت اطلاعیه‌ها...
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================
+         SUPPORT SECTION
+    ======================= -->
+
+    <div
+        id="supportSection"
+        style="display:none;"
+    >
+
+        <div class="card">
+
+            <div class="posts-header">
+
+                <div class="card-title" style="margin:0;">
+                    💬 پیام‌های پشتیبانی
+                </div>
+
+                <button
+                    class="refresh"
+                    onclick="loadConversations()"
+                >
+                    ↻ بروزرسانی
+                </button>
+
+            </div>
+
+            <div class="support-layout">
+
+
+                <!-- CONVERSATIONS -->
+
+                <div
+                    id="conversationList"
+                    class="conversations"
+                >
+
+                    <div class="empty">
+                        ⏳ در حال دریافت گفتگوها...
+                    </div>
+
+                </div>
+
+
+                <!-- CHAT -->
+
+                <div class="chat">
+
+                    <div
+                        id="chatHeader"
+                        class="chat-header"
+                    >
+
+                        <div class="user-avatar">
+                            V
+                        </div>
+
+                        <div style="flex:1;">
+
+                            <div class="chat-title">
+                                V2GURD Support
+                            </div>
+
+                            <div class="chat-subtitle">
+                                یک گفتگو را انتخاب کنید
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="chatMessages"
+                        class="chat-messages"
+                    >
+
+                        <div class="chat-empty">
+
+                            💬
+
+                            <br>
+
+                            از لیست گفتگوها یک کاربر را انتخاب کنید.
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="reply-box">
+
+                        <textarea
+                            id="replyInput"
+                            class="reply-input"
+                            placeholder="پاسخ به کاربر..."
+                            rows="1"
+                            disabled
+                        ></textarea>
+
+                        <button
+                            id="replyButton"
+                            class="reply-button"
+                            onclick="sendReply()"
+                            disabled
+                        >
+                            ➤
+                        </button>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -604,6 +999,17 @@ window.supabase.createClient(
 
 
 /* =================================
+   GLOBALS
+================================= */
+
+let currentConversation = null;
+
+let supportChannel = null;
+
+let conversationChannel = null;
+
+
+/* =================================
    HELPERS
 ================================= */
 
@@ -621,15 +1027,13 @@ function showMessage(id,text,type){
 
 function escapeHTML(value){
 
-    if(value === null ||
-       value === undefined){
-
+    if(
+        value === null ||
+        value === undefined
+    )
         return "";
 
-    }
-
     return String(value)
-
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -640,9 +1044,6 @@ function escapeHTML(value){
 
 function formatDate(date){
 
-    const d =
-        new Date(date);
-
     return new Intl.DateTimeFormat(
         "fa-IR",
         {
@@ -652,7 +1053,64 @@ function formatDate(date){
             hour:"2-digit",
             minute:"2-digit"
         }
-    ).format(d);
+    ).format(
+        new Date(date)
+    );
+
+}
+
+
+/* =================================
+   TABS
+================================= */
+
+function showTab(tab){
+
+    const posts =
+        document.getElementById(
+            "postsSection"
+        );
+
+    const support =
+        document.getElementById(
+            "supportSection"
+        );
+
+    const postsTab =
+        document.getElementById(
+            "postsTab"
+        );
+
+    const supportTab =
+        document.getElementById(
+            "supportTab"
+        );
+
+
+    if(tab === "posts"){
+
+        posts.style.display = "block";
+
+        support.style.display = "none";
+
+        postsTab.classList.add("active");
+
+        supportTab.classList.remove("active");
+
+    }else{
+
+        posts.style.display = "none";
+
+        support.style.display = "block";
+
+        postsTab.classList.remove("active");
+
+        supportTab.classList.add("active");
+
+        loadConversations();
+
+    }
+
 }
 
 
@@ -687,6 +1145,7 @@ async function login(){
         );
 
         return;
+
     }
 
 
@@ -733,6 +1192,10 @@ async function login(){
 
         await loadPosts();
 
+        await loadConversations();
+
+        subscribeAdminRealtime();
+
 
     }catch(error){
 
@@ -749,6 +1212,7 @@ async function login(){
 
     button.textContent =
         "ورود";
+
 }
 
 
@@ -780,9 +1244,14 @@ async function checkSession(){
         ).style.display = "block";
 
 
-        loadPosts();
+        await loadPosts();
+
+        await loadConversations();
+
+        subscribeAdminRealtime();
 
     }
+
 }
 
 
@@ -792,14 +1261,33 @@ async function checkSession(){
 
 async function logout(){
 
+    if(supportChannel){
+
+        await supabaseClient
+        .removeChannel(
+            supportChannel
+        );
+
+    }
+
+    if(conversationChannel){
+
+        await supabaseClient
+        .removeChannel(
+            conversationChannel
+        );
+
+    }
+
     await supabaseClient.auth.signOut();
 
     location.reload();
+
 }
 
 
 /* =================================
-   PUBLISH
+   PUBLISH POST
 ================================= */
 
 async function publishPost(){
@@ -834,6 +1322,7 @@ async function publishPost(){
         );
 
         return;
+
     }
 
 
@@ -846,6 +1335,7 @@ async function publishPost(){
         );
 
         return;
+
     }
 
 
@@ -877,7 +1367,6 @@ async function publishPost(){
 
 
         const {
-            data,
             error
         } =
         await supabaseClient
@@ -889,9 +1378,7 @@ async function publishPost(){
             type:type,
             published:true
 
-        })
-        .select()
-        .single();
+        });
 
 
         if(error)
@@ -935,6 +1422,7 @@ async function publishPost(){
 
     button.textContent =
         "🚀 انتشار اطلاعیه";
+
 }
 
 
@@ -948,6 +1436,10 @@ async function loadPosts(){
         document.getElementById(
             "postsList"
         );
+
+
+    if(!list)
+        return;
 
 
     list.innerHTML = `
@@ -1024,6 +1516,7 @@ function renderPosts(posts){
         `;
 
         return;
+
     }
 
 
@@ -1087,20 +1580,12 @@ function renderPosts(posts){
 
         item.innerHTML = `
 
-            <div class="post-top">
+            <div class="post-title">
+                ${escapeHTML(post.title)}
+            </div>
 
-                <div class="post-info">
-
-                    <div class="post-title">
-                        ${escapeHTML(post.title)}
-                    </div>
-
-                    <div class="post-date">
-                        ${formatDate(post.created_at)}
-                    </div>
-
-                </div>
-
+            <div class="post-date">
+                ${formatDate(post.created_at)}
             </div>
 
             ${status}
@@ -1121,6 +1606,7 @@ function renderPosts(posts){
                 </button>
 
             </div>
+
         `;
 
 
@@ -1231,7 +1717,846 @@ async function deletePost(id){
 
 
 /* =================================
-   REALTIME
+   LOAD CONVERSATIONS
+================================= */
+
+async function loadConversations(){
+
+    const list =
+        document.getElementById(
+            "conversationList"
+        );
+
+
+    if(!list)
+        return;
+
+
+    list.innerHTML = `
+        <div class="empty">
+            ⏳ در حال دریافت گفتگوها...
+        </div>
+    `;
+
+
+    try{
+
+        const {
+            data:conversations,
+            error
+        } =
+        await supabaseClient
+
+        .from(
+            "support_conversations"
+        )
+
+        .select(
+            "id,user_id,status,created_at"
+        )
+
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+        if(error)
+            throw error;
+
+
+        if(
+            !conversations ||
+            !conversations.length
+        ){
+
+            list.innerHTML = `
+                <div class="empty">
+                    📭 هنوز گفتگویی وجود ندارد.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        /*
+         * برای هر Conversation آخرین پیام
+         * را می‌گیریم.
+         */
+
+        const enriched = [];
+
+
+        for(
+            const conversation
+            of conversations
+        ){
+
+            const {
+                data:messages
+            } =
+            await supabaseClient
+
+            .from(
+                "support_messages"
+            )
+
+            .select(
+                "id,sender,content,created_at"
+            )
+
+            .eq(
+                "conversation_id",
+                conversation.id
+            )
+
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            )
+
+            .limit(1);
+
+
+            enriched.push({
+
+                ...conversation,
+
+                lastMessage:
+                    messages &&
+                    messages.length
+                    ? messages[0]
+                    : null
+
+            });
+
+        }
+
+
+        renderConversations(
+            enriched
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        list.innerHTML = `
+            <div class="empty" style="color:#ff8095;">
+                ❌ ${escapeHTML(error.message)}
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =================================
+   RENDER CONVERSATIONS
+================================= */
+
+function renderConversations(
+    conversations
+){
+
+    const list =
+        document.getElementById(
+            "conversationList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    conversations.forEach(
+        conversation => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "conversation";
+
+
+            if(
+                currentConversation &&
+                currentConversation.id ===
+                conversation.id
+            ){
+
+                item.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            const last =
+                conversation.lastMessage;
+
+
+            item.innerHTML = `
+
+                <div class="conversation-top">
+
+                    <div class="user-avatar">
+                        V
+                    </div>
+
+                    <div class="conversation-info">
+
+                        <div class="user-name">
+                            کاربر ${escapeHTML(
+                                conversation.user_id
+                                .slice(0,8)
+                            )}
+                        </div>
+
+                        <div class="last-message">
+                            ${
+                                last
+                                ? escapeHTML(
+                                    last.content
+                                  )
+                                : "گفتگو شروع شده"
+                            }
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        ${
+                            last
+                            ? `
+                                <div class="conversation-time">
+                                    ${formatDate(
+                                        last.created_at
+                                    )}
+                                </div>
+                              `
+                            : ""
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            item.onclick =
+                () => {
+
+                    openConversation(
+                        conversation
+                    );
+
+                };
+
+
+            list.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   OPEN CONVERSATION
+================================= */
+
+async function openConversation(
+    conversation
+){
+
+    currentConversation =
+        conversation;
+
+
+    document
+        .querySelectorAll(
+            ".conversation"
+        )
+        .forEach(
+            el =>
+                el.classList.remove(
+                    "active"
+                )
+        );
+
+
+    await loadConversationMessages();
+
+
+    subscribeConversation(
+        conversation.id
+    );
+
+
+    const input =
+        document.getElementById(
+            "replyInput"
+        );
+
+    const button =
+        document.getElementById(
+            "replyButton"
+        );
+
+
+    input.disabled = false;
+
+    button.disabled = false;
+
+    input.focus();
+
+}
+
+
+/* =================================
+   LOAD CONVERSATION MESSAGES
+================================= */
+
+async function loadConversationMessages(){
+
+    const box =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    if(!currentConversation)
+        return;
+
+
+    box.innerHTML = `
+        <div class="chat-empty">
+            ⏳ در حال دریافت پیام‌ها...
+        </div>
+    `;
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+
+        .from(
+            "support_messages"
+        )
+
+        .select(
+            "id,conversation_id,sender,content,created_at"
+        )
+
+        .eq(
+            "conversation_id",
+            currentConversation.id
+        )
+
+        .order(
+            "created_at",
+            {
+                ascending:true
+            }
+        );
+
+
+        if(error)
+            throw error;
+
+
+        box.innerHTML = "";
+
+
+        if(
+            !data ||
+            !data.length
+        ){
+
+            box.innerHTML = `
+                <div class="chat-empty">
+                    💬 هنوز پیامی ارسال نشده است.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        data.forEach(
+            renderAdminMessage
+        );
+
+
+        scrollChat();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        box.innerHTML = `
+            <div class="chat-empty">
+                ❌ ${escapeHTML(error.message)}
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =================================
+   RENDER ADMIN MESSAGE
+================================= */
+
+function renderAdminMessage(
+    message
+){
+
+    const box =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    if(
+        box.querySelector(
+            `[data-message-id="${message.id}"]`
+        )
+    )
+        return;
+
+
+    const empty =
+        box.querySelector(
+            ".chat-empty"
+        );
+
+
+    if(empty)
+        empty.remove();
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    const isUser =
+        message.sender === "user";
+
+
+    div.className =
+        "chat-message " +
+        (
+            isUser
+            ? "user"
+            : "admin"
+        );
+
+
+    div.dataset.messageId =
+        message.id;
+
+
+    div.innerHTML = `
+
+        ${escapeHTML(
+            message.content
+        )}
+
+        <div class="message-time">
+
+            ${formatDate(
+                message.created_at
+            )}
+
+            ${
+                !isUser
+                ? "✓✓"
+                : ""
+            }
+
+        </div>
+
+    `;
+
+
+    box.appendChild(
+        div
+    );
+
+}
+
+
+/* =================================
+   SEND REPLY
+================================= */
+
+async function sendReply(){
+
+    if(!currentConversation)
+        return;
+
+
+    const input =
+        document.getElementById(
+            "replyInput"
+        );
+
+    const button =
+        document.getElementById(
+            "replyButton"
+        );
+
+
+    const content =
+        input.value.trim();
+
+
+    if(!content)
+        return;
+
+
+    button.disabled = true;
+
+
+    try{
+
+        const {
+            error
+        } =
+        await supabaseClient
+
+        .from(
+            "support_messages"
+        )
+
+        .insert({
+
+            conversation_id:
+                currentConversation.id,
+
+            sender:"admin",
+
+            content:content
+
+        });
+
+
+        if(error)
+            throw error;
+
+
+        input.value = "";
+
+        input.style.height =
+            "40px";
+
+
+        input.focus();
+
+
+    }catch(error){
+
+        alert(
+            "❌ ارسال پاسخ انجام نشد:\n" +
+            error.message
+        );
+
+    }
+
+
+    button.disabled = false;
+
+}
+
+
+/* =================================
+   REALTIME CONVERSATIONS
+================================= */
+
+function subscribeAdminRealtime(){
+
+    if(supportChannel){
+
+        supabaseClient
+            .removeChannel(
+                supportChannel
+            );
+
+    }
+
+
+    supportChannel =
+        supabaseClient
+
+        .channel(
+            "admin-support"
+        )
+
+        .on(
+
+            "postgres_changes",
+
+            {
+                event:"INSERT",
+                schema:"public",
+                table:"support_messages"
+            },
+
+            payload => {
+
+                /*
+                 * پیام جدید آمد؛
+                 * لیست گفتگوها را تازه کن.
+                 */
+
+                loadConversations();
+
+
+                /*
+                 * اگر همین گفتگو باز است،
+                 * پیام را مستقیم نمایش بده.
+                 */
+
+                if(
+                    currentConversation &&
+                    Number(
+                        currentConversation.id
+                    ) ===
+                    Number(
+                        payload.new.conversation_id
+                    )
+                ){
+
+                    renderAdminMessage(
+                        payload.new
+                    );
+
+                    scrollChat();
+
+                }
+
+
+                /*
+                 * اگر پیام از کاربر است،
+                 * تعداد پیام جدید را نشان بده.
+                 */
+
+                if(
+                    payload.new.sender ===
+                    "user"
+                ){
+
+                    updateUnreadCount();
+
+                }
+
+            }
+
+        )
+
+        .subscribe();
+
+}
+
+
+/* =================================
+   CONVERSATION REALTIME
+================================= */
+
+function subscribeConversation(
+    conversationId
+){
+
+    if(conversationChannel){
+
+        supabaseClient
+            .removeChannel(
+                conversationChannel
+            );
+
+    }
+
+
+    conversationChannel =
+        supabaseClient
+
+        .channel(
+            "admin-conversation-" +
+            conversationId
+        )
+
+        .on(
+
+            "postgres_changes",
+
+            {
+                event:"INSERT",
+                schema:"public",
+                table:"support_messages",
+                filter:
+                    "conversation_id=eq." +
+                    conversationId
+            },
+
+            payload => {
+
+                renderAdminMessage(
+                    payload.new
+                );
+
+                scrollChat();
+
+            }
+
+        )
+
+        .subscribe();
+
+}
+
+
+/* =================================
+   UNREAD COUNT
+================================= */
+
+async function updateUnreadCount(){
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+
+        .from(
+            "support_messages"
+        )
+
+        .select(
+            "id,conversation_id"
+        )
+
+        .eq(
+            "sender",
+            "user"
+        );
+
+
+        if(error)
+            return;
+
+
+        const count =
+            data
+            ? data.length
+            : 0;
+
+
+        const badge =
+            document.getElementById(
+                "unreadCount"
+            );
+
+
+        if(count > 0){
+
+            badge.textContent =
+                count > 99
+                ? "99+"
+                : count;
+
+            badge.style.display =
+                "inline-flex";
+
+        }else{
+
+            badge.style.display =
+                "none";
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =================================
+   CHAT SCROLL
+================================= */
+
+function scrollChat(){
+
+    const box =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    box.scrollTop =
+        box.scrollHeight;
+
+}
+
+
+/* =================================
+   REPLY ENTER
+================================= */
+
+document
+    .getElementById(
+        "replyInput"
+    )
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(
+                event.key === "Enter" &&
+                !event.shiftKey
+            ){
+
+                event.preventDefault();
+
+                sendReply();
+
+            }
+
+        }
+    );
+
+
+/* =================================
+   REALTIME POSTS
 ================================= */
 
 supabaseClient
@@ -1252,7 +2577,16 @@ supabaseClient
 
     () => {
 
-        loadPosts();
+        if(
+            document.getElementById(
+                "adminSection"
+            ).style.display !==
+            "none"
+        ){
+
+            loadPosts();
+
+        }
 
     }
 
