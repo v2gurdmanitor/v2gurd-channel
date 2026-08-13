@@ -6,19 +6,23 @@
 
 <title>V2GURD Channel</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 
 :root{
+    --bg:#0b1218;
+    --header:#111b23;
+    --card:#17232d;
+    --card2:#1a2933;
     --green:#39ff88;
-    --blue:#2196ff;
-    --red:#ff4164;
-    --bg:#020608;
-    --card:rgba(7,18,23,.78);
-    --border:rgba(57,255,136,.13);
-    --text:#effff6;
-    --muted:#71877e;
+    --blue:#168fff;
+    --red:#ff4969;
+    --text:#f1f7f5;
+    --muted:#8da09a;
+    --line:rgba(255,255,255,.07);
 }
 
 *{
@@ -27,207 +31,114 @@
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     min-height:100vh;
-    background:#020608;
-    color:var(--text);
-    font-family:"Vazirmatn",sans-serif;
-    overflow-x:hidden;
-}
-
-
-/* =========================
-   CYBER BACKGROUND
-========================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-5;
-
-    background:
-        linear-gradient(
-            rgba(57,255,136,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(33,150,255,.025) 1px,
-            transparent 1px
-        );
-
-    background-size:45px 45px;
-}
-
-.glow{
-    position:fixed;
-    width:400px;
-    height:400px;
-    border-radius:50%;
-    filter:blur(120px);
-    opacity:.12;
-    z-index:-4;
-    pointer-events:none;
-}
-
-.glow.green{
-    background:var(--green);
-    top:-180px;
-    right:-150px;
-}
-
-.glow.blue{
-    background:var(--blue);
-    bottom:-180px;
-    left:-150px;
-}
-
-.glow.red{
-    background:var(--red);
-    width:250px;
-    height:250px;
-    top:45%;
-    left:45%;
-    opacity:.035;
-}
-
-
-/* =========================
-   MOVING CODE
-========================= */
-
-.code{
-    position:fixed;
-    z-index:-3;
-
-    color:rgba(57,255,136,.07);
-
-    font-family:monospace;
-    font-size:10px;
-
-    white-space:nowrap;
-
-    pointer-events:none;
-
-    animation:codeMove linear infinite;
-}
-
-.code.blue{
-    color:rgba(33,150,255,.07);
-}
-
-.code.red{
-    color:rgba(255,65,100,.06);
-}
-
-@keyframes codeMove{
-
-    from{
-        transform:translateX(100vw);
-    }
-
-    to{
-        transform:translateX(-120vw);
-    }
-
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.header{
-
-    position:sticky;
-    top:0;
-
-    z-index:20;
-
-    background:rgba(2,7,9,.78);
-
-    border-bottom:1px solid var(--border);
-
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
-}
-
-.header-inner{
-
-    width:min(700px,calc(100% - 24px));
-
-    margin:auto;
-
-    padding:15px 0;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
-}
-
-
-/* AVATAR */
-
-.avatar{
-
-    width:52px;
-    height:52px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    font-size:19px;
-    font-weight:800;
-
     background:
         radial-gradient(
-            circle,
-            rgba(57,255,136,.18),
-            rgba(2,10,13,.95)
-        );
+            circle at 10% 10%,
+            rgba(57,255,136,.035),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(22,143,255,.035),
+            transparent 30%
+        ),
+        var(--bg);
 
-    border:1px solid rgba(57,255,136,.3);
-
-    box-shadow:
-        0 0 25px rgba(57,255,136,.1);
+    color:var(--text);
+    font-family:"Vazirmatn",sans-serif;
 }
 
 
-/* CHANNEL INFO */
+/* ================================
+   MAIN APP
+================================ */
 
-.channel-info{
-    flex:1;
+.app{
+    width:min(760px,100%);
+    min-height:100vh;
+    margin:auto;
+    background:rgba(8,15,21,.55);
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:50;
+
+    height:74px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 18px;
+
+    background:rgba(17,27,35,.94);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid var(--line);
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #14251d,
+            #102d22
+        );
+
+    border:1px solid rgba(57,255,136,.2);
+
+    color:var(--green);
+
+    font-size:18px;
+    font-weight:800;
+
+    box-shadow:
+        0 0 20px rgba(57,255,136,.08);
 }
 
 .channel-name{
+    font-size:14px;
+    font-weight:800;
 
     display:flex;
-
     align-items:center;
-
-    gap:6px;
-
-    font-size:15px;
-
-    font-weight:800;
+    gap:5px;
 }
 
-.verified{
-
+.verify{
     width:17px;
     height:17px;
 
     display:inline-flex;
-
     align-items:center;
     justify-content:center;
 
@@ -237,15 +148,14 @@ body::before{
 
     color:white;
 
-    font-size:10px;
+    font-size:9px;
 
     box-shadow:
-        0 0 12px rgba(22,143,255,.6);
+        0 0 10px rgba(22,143,255,.4);
 }
 
 .channel-status{
-
-    margin-top:3px;
+    margin-top:2px;
 
     color:var(--muted);
 
@@ -253,166 +163,115 @@ body::before{
 }
 
 .online{
-
     color:var(--green);
-
 }
 
 
-/* TELEGRAM BUTTON */
+/* ================================
+   MENU
+================================ */
 
-.telegram-btn{
+.menu{
+    width:35px;
+    height:35px;
 
-    text-decoration:none;
+    border-radius:50%;
 
-    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    padding:9px 13px;
+    color:#9cafaa;
 
-    border-radius:13px;
-
-    background:rgba(33,150,255,.1);
-
-    border:1px solid rgba(33,150,255,.2);
-
-    font-size:9px;
-
-    transition:.3s;
-}
-
-.telegram-btn:hover{
-
-    background:rgba(33,150,255,.2);
-
-    transform:translateY(-2px);
+    font-size:19px;
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* ================================
+   CHANNEL COVER
+================================ */
 
-.container{
-
-    width:min(700px,calc(100% - 24px));
-
-    margin:auto;
-
-    padding:30px 0 70px;
-}
-
-
-/* CHANNEL INTRO */
-
-.channel-card{
-
-    padding:22px;
-
-    margin-bottom:18px;
-
-    border-radius:24px;
+.cover{
+    padding:28px 18px 20px;
 
     background:
         linear-gradient(
-            145deg,
-            rgba(8,25,31,.78),
-            rgba(3,10,14,.72)
+            180deg,
+            rgba(22,143,255,.035),
+            transparent
         );
 
-    border:1px solid var(--border);
-
-    backdrop-filter:blur(22px);
-
-    text-align:center;
+    border-bottom:1px solid var(--line);
 }
 
-.channel-card h1{
+.cover-title{
+    font-size:20px;
+    font-weight:800;
 
-    font-size:22px;
-
-    margin-bottom:8px;
+    margin-bottom:6px;
 }
 
-.channel-card h1 span{
-
-    color:var(--green);
-
-    text-shadow:
-        0 0 20px rgba(57,255,136,.2);
-}
-
-.channel-card p{
-
+.cover-description{
     color:var(--muted);
 
     font-size:10px;
 
     line-height:2;
+
+    max-width:600px;
 }
 
-.channel-stats{
+.cover-line{
+    width:50px;
+    height:2px;
 
-    display:flex;
+    margin-top:14px;
 
-    justify-content:center;
+    background:var(--green);
 
-    gap:25px;
-
-    margin-top:16px;
-
-    color:var(--muted);
-
-    font-size:9px;
-}
-
-.channel-stats b{
-
-    color:var(--green);
-
+    box-shadow:
+        0 0 10px rgba(57,255,136,.35);
 }
 
 
-/* =========================
+/* ================================
    POSTS
-========================= */
+================================ */
+
+.feed{
+    padding:14px 10px 50px;
+}
 
 .post{
+    position:relative;
 
-    margin-bottom:15px;
+    margin-bottom:10px;
 
-    padding:19px;
+    padding:16px 16px 12px;
 
-    border-radius:22px;
-
-    background:var(--card);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(27,40,49,.98),
+            rgba(20,32,41,.98)
+        );
 
     border:1px solid rgba(255,255,255,.055);
 
-    backdrop-filter:blur(20px);
-
-    -webkit-backdrop-filter:blur(20px);
+    border-radius:15px;
 
     box-shadow:
-        0 15px 45px rgba(0,0,0,.18);
+        0 5px 20px rgba(0,0,0,.12);
 
-    transition:.3s;
-
-    animation:postIn .6s ease both;
-}
-
-.post:hover{
-
-    border-color:rgba(57,255,136,.22);
-
-    transform:translateY(-2px);
-
+    animation:
+        postIn .35s ease both;
 }
 
 @keyframes postIn{
 
     from{
         opacity:0;
-        transform:translateY(15px);
+        transform:translateY(8px);
     }
 
     to{
@@ -422,203 +281,255 @@ body::before{
 
 }
 
+.post:hover{
+    border-color:
+        rgba(57,255,136,.12);
+}
+
+.post.important{
+    border-right:
+        2px solid var(--red);
+}
+
+.post.update{
+    border-right:
+        2px solid var(--blue);
+}
+
+.post.success{
+    border-right:
+        2px solid var(--green);
+}
+
 
 /* POST HEADER */
 
 .post-header{
-
     display:flex;
-
     align-items:center;
+    gap:8px;
 
-    gap:9px;
-
-    margin-bottom:13px;
+    margin-bottom:10px;
 }
 
-.post-avatar{
+.post-icon{
+    width:30px;
+    height:30px;
 
-    width:36px;
-    height:36px;
-
-    border-radius:50%;
+    border-radius:9px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
-    background:rgba(57,255,136,.08);
-
-    border:1px solid rgba(57,255,136,.15);
-
-    font-size:13px;
-}
-
-.post-author{
-
-    font-size:10px;
-
-    font-weight:700;
-}
-
-.post-date{
-
-    display:block;
-
-    color:#53645e;
-
-    font-size:8px;
-
-    margin-top:2px;
-}
-
-
-/* POST TITLE */
-
-.post-title{
+    background:rgba(255,255,255,.045);
 
     font-size:14px;
-
-    font-weight:700;
-
-    margin-bottom:8px;
 }
 
-.post-text{
-
-    color:#b4c5be;
-
-    font-size:10px;
-
-    line-height:2;
-
-    white-space:pre-line;
+.post-meta{
+    flex:1;
 }
 
-
-/* IMPORTANT POST */
-
-.post.important{
-
-    border-color:
-        rgba(255,65,100,.2);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(40,10,17,.5),
-            rgba(7,18,23,.78)
-        );
+.post-title{
+    font-size:12px;
+    font-weight:800;
 }
 
-.post.important .post-title{
+.post-type{
+    margin-top:2px;
 
-    color:var(--red);
+    font-size:8px;
+
+    color:var(--muted);
 }
 
 
-/* UPDATE */
+/* POST CONTENT */
 
-.post.update{
+.post-content{
+    color:#d9e5e1;
 
-    border-color:
-        rgba(33,150,255,.16);
-}
+    font-size:11px;
 
-.post.update .post-title{
+    line-height:2.05;
 
-    color:var(--blue);
-}
+    white-space:pre-wrap;
 
-
-/* SUCCESS */
-
-.post.success{
-
-    border-color:
-        rgba(57,255,136,.18);
-}
-
-.post.success .post-title{
-
-    color:var(--green);
+    word-break:break-word;
 }
 
 
-/* =========================
-   POST FOOTER
-========================= */
+/* POST FOOTER */
 
 .post-footer{
-
     display:flex;
-
-    justify-content:space-between;
-
+    justify-content:flex-end;
     align-items:center;
 
-    margin-top:15px;
+    gap:6px;
 
-    padding-top:11px;
+    margin-top:11px;
 
-    border-top:1px solid rgba(255,255,255,.04);
+    padding-top:9px;
 
-    color:#4f625b;
+    border-top:1px solid rgba(255,255,255,.035);
+
+    color:#667a73;
 
     font-size:8px;
 }
 
-.post-tag{
-
-    color:var(--green);
-
-    opacity:.8;
+.check{
+    color:#42a5ff;
+    font-size:10px;
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* ================================
+   LOADING
+================================ */
 
-.footer{
-
+.loading{
     text-align:center;
 
-    padding:30px;
+    padding:55px 20px;
 
-    color:#40514b;
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.loader{
+    width:25px;
+    height:25px;
+
+    margin:0 auto 12px;
+
+    border-radius:50%;
+
+    border:
+        2px solid
+        rgba(57,255,136,.12);
+
+    border-top-color:
+        var(--green);
+
+    animation:
+        spin .8s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* ================================
+   EMPTY
+================================ */
+
+.empty{
+    text-align:center;
+
+    padding:65px 20px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.empty-icon{
+    font-size:30px;
+
+    margin-bottom:12px;
+
+    opacity:.7;
+}
+
+
+/* ================================
+   ERROR
+================================ */
+
+.error{
+    margin:20px;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    color:#ff9aac;
+
+    background:
+        rgba(255,73,105,.07);
+
+    border:
+        1px solid
+        rgba(255,73,105,.15);
+
+    font-size:9px;
+
+    line-height:1.8;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+.footer{
+    text-align:center;
+
+    padding:20px;
+
+    color:#52645e;
 
     font-size:8px;
-}
 
-.footer b{
-
-    color:#71877e;
+    border-top:1px solid var(--line);
 }
 
 
-/* =========================
+/* ================================
    MOBILE
-========================= */
+================================ */
 
 @media(max-width:600px){
 
-    .telegram-btn{
+    .header{
+        height:68px;
+        padding:0 14px;
+    }
 
-        font-size:8px;
-
-        padding:8px 10px;
+    .avatar{
+        width:41px;
+        height:41px;
     }
 
     .channel-name{
-
         font-size:13px;
     }
 
-    .channel-card h1{
+    .cover{
+        padding:22px 15px 17px;
+    }
 
-        font-size:19px;
+    .cover-title{
+        font-size:18px;
+    }
+
+    .feed{
+        padding:
+            10px 7px 40px;
+    }
+
+    .post{
+        padding:
+            14px 13px 11px;
     }
 
 }
@@ -629,35 +540,28 @@ body::before{
 
 <body>
 
-
-<div class="glow green"></div>
-<div class="glow blue"></div>
-<div class="glow red"></div>
-
-<div id="codes"></div>
+<div class="app">
 
 
-<!-- =========================
+<!-- ================================
      HEADER
-========================= -->
+================================ -->
 
 <header class="header">
 
-    <div class="header-inner">
-
+    <div class="header-left">
 
         <div class="avatar">
-            V2
+            V
         </div>
 
-
-        <div class="channel-info">
+        <div>
 
             <div class="channel-name">
 
                 V2GURD
 
-                <span class="verified">
+                <span class="verify">
                     ✓
                 </span>
 
@@ -665,343 +569,476 @@ body::before{
 
             <div class="channel-status">
 
+                کانال رسمی
                 <span class="online">
-                    ●
+                    • آنلاین
                 </span>
-
-                Official Channel
 
             </div>
 
         </div>
 
-
-        <a
-            class="telegram-btn"
-            href="https://t.me/v2gurdd"
-            target="_blank"
-        >
-
-            TELEGRAM ↗
-
-        </a>
+    </div>
 
 
+    <div class="menu">
+        ⋮
     </div>
 
 </header>
 
 
+<!-- ================================
+     COVER
+================================ -->
 
-<!-- =========================
-     CONTENT
-========================= -->
+<section class="cover">
 
-<main class="container">
+    <div class="cover-title">
+        V2GURD Channel
+    </div>
 
+    <div class="cover-description">
+        مرجع اطلاع‌رسانی رسمی V2GURD
+        <br>
+        اطلاعیه‌ها، بروزرسانی‌ها و وضعیت سرویس‌ها
+    </div>
 
-    <!-- INTRO -->
+    <div class="cover-line"></div>
 
-    <section class="channel-card">
+</section>
 
-        <h1>
 
-            <span>V2GURD</span>
-            CHANNEL
+<!-- ================================
+     FEED
+================================ -->
 
-        </h1>
+<main id="feed" class="feed">
 
-        <p>
+    <div class="loading">
 
-            کانال رسمی اطلاع‌رسانی V2GURD
-            <br>
-            اخبار، بروزرسانی سرورها، اختلالات،
-            تخفیف‌ها و اطلاعیه‌های مهم
+        <div class="loader"></div>
 
-        </p>
+        در حال دریافت اطلاعیه‌ها...
 
-
-        <div class="channel-stats">
-
-            <span>
-                STATUS:
-                <b>ONLINE</b>
-            </span>
-
-            <span>
-                NETWORK:
-                <b>SECURE</b>
-            </span>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         POSTS
-    ========================= -->
-
-
-    <!-- IMPORTANT -->
-
-    <article class="post important">
-
-        <div class="post-header">
-
-            <div class="post-avatar">
-                🚨
-            </div>
-
-            <div>
-
-                <div class="post-author">
-                    V2GURD
-                </div>
-
-                <span class="post-date">
-                    13 Aug 2026 • 01:30
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="post-title">
-
-            اطلاعیه مهم
-
-        </div>
-
-
-        <div class="post-text">
-
-            در صورت اعمال تغییرات یا بروزرسانی
-            روی سرورها، اطلاعیه مربوطه از همین
-            بخش منتشر خواهد شد.
-
-        </div>
-
-
-        <div class="post-footer">
-
-            <span>
-                V2GURD ✓
-            </span>
-
-            <span class="post-tag">
-                #IMPORTANT
-            </span>
-
-        </div>
-
-    </article>
-
-
-
-    <!-- UPDATE -->
-
-    <article class="post update">
-
-        <div class="post-header">
-
-            <div class="post-avatar">
-                🛠️
-            </div>
-
-            <div>
-
-                <div class="post-author">
-                    V2GURD
-                </div>
-
-                <span class="post-date">
-                    13 Aug 2026 • 01:20
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="post-title">
-
-            بروزرسانی شبکه
-
-        </div>
-
-
-        <div class="post-text">
-
-            سرویس‌ها در حال بررسی و بهینه‌سازی
-            هستند.
-
-            در صورت مشاهده تغییرات موقت،
-            تا پایان عملیات صبر کنید.
-
-        </div>
-
-
-        <div class="post-footer">
-
-            <span>
-                V2GURD ✓
-            </span>
-
-            <span class="post-tag">
-                #UPDATE
-            </span>
-
-        </div>
-
-    </article>
-
-
-
-    <!-- SUCCESS -->
-
-    <article class="post success">
-
-        <div class="post-header">
-
-            <div class="post-avatar">
-                🟢
-            </div>
-
-            <div>
-
-                <div class="post-author">
-                    V2GURD
-                </div>
-
-                <span class="post-date">
-                    13 Aug 2026 • 01:10
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="post-title">
-
-            وضعیت سرویس‌ها
-
-        </div>
-
-
-        <div class="post-text">
-
-            تمامی سرویس‌ها در وضعیت پایدار
-            قرار دارند.
-
-            وضعیت شبکه: Stable
-            Packet Loss: 0%
-
-        </div>
-
-
-        <div class="post-footer">
-
-            <span>
-                V2GURD ✓
-            </span>
-
-            <span class="post-tag">
-                #STATUS
-            </span>
-
-        </div>
-
-    </article>
-
-
+    </div>
 
 </main>
 
 
-
 <footer class="footer">
 
-    <b>V2GURD ✓</b>
+    V2GURD
+    <span style="color:#168fff;">✓</span>
 
-    — OFFICIAL INFORMATION CHANNEL
+    • Official Channel
 
 </footer>
 
 
+</div>
+
 
 <script>
 
+/* =================================
+   SUPABASE
+================================= */
 
-/* =========================
-   CYBER CODE
-========================= */
+const SUPABASE_URL =
+"https://dymfrorzgmmsbvazsvnb.supabase.co";
 
-const codes = [
-
-    "V2GURD://CHANNEL",
-    "NETWORK::ONLINE",
-    "SECURE_CONNECTION",
-    "NODE::DE",
-    "NODE::FI",
-    "SYSTEM_OPERATIONAL",
-    "PACKET::0xA91F",
-    "TLS_HANDSHAKE",
-    "AUTH::SUCCESS",
-    "ROUTE_STABLE",
-    "SERVER_STATUS::ONLINE",
-    "V2GURD_CORE",
-    "PING::42ms",
-    "PACKET_LOSS::0%",
-    "CHANNEL::ACTIVE"
-
-];
+const SUPABASE_KEY =
+"sb_publishable_UXgv11NDv5gIxPdKwMZwZQ_WSQZa2qw";
 
 
-const container =
-    document.getElementById("codes");
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
-for(let i=0;i<35;i++){
+/* =================================
+   FEED
+================================= */
 
-    const el =
-        document.createElement("div");
+const feed =
+document.getElementById("feed");
 
-    el.className="code";
 
-    if(i % 6 === 0){
-        el.classList.add("blue");
+/* =================================
+   TYPE SETTINGS
+================================= */
+
+function getPostType(type){
+
+    switch(type){
+
+        case "important":
+
+            return {
+                icon:"🚨",
+                label:"اطلاعیه مهم",
+                className:"important"
+            };
+
+        case "update":
+
+            return {
+                icon:"🛠️",
+                label:"بروزرسانی",
+                className:"update"
+            };
+
+        case "success":
+
+            return {
+                icon:"🟢",
+                label:"وضعیت پایدار",
+                className:"success"
+            };
+
+        default:
+
+            return {
+                icon:"📢",
+                label:"اطلاعیه",
+                className:"normal"
+            };
+
     }
-
-    if(i % 13 === 0){
-        el.classList.add("red");
-    }
-
-    el.textContent =
-        codes[
-            Math.floor(
-                Math.random()*codes.length
-            )
-        ];
-
-    el.style.top =
-        Math.random()*100+"%";
-
-    el.style.animationDuration =
-        (18+Math.random()*30)+"s";
-
-    el.style.animationDelay =
-        (-Math.random()*30)+"s";
-
-    container.appendChild(el);
 
 }
 
-</script>
 
+/* =================================
+   DATE
+================================= */
+
+function formatDate(date){
+
+    const d =
+        new Date(date);
+
+    return new Intl.DateTimeFormat(
+        "fa-IR",
+        {
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit"
+        }
+    ).format(d);
+
+}
+
+
+/* =================================
+   TIME
+================================= */
+
+function formatTime(date){
+
+    const d =
+        new Date(date);
+
+    return new Intl.DateTimeFormat(
+        "fa-IR",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    ).format(d);
+
+}
+
+
+/* =================================
+   LOAD POSTS
+================================= */
+
+async function loadPosts(){
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+
+        .from("posts")
+
+        .select(
+            "id,title,content,type,created_at,published"
+        )
+
+        .eq(
+            "published",
+            true
+        )
+
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+        if(error){
+
+            console.error(
+                "LOAD POSTS ERROR:",
+                error
+            );
+
+            showError(
+                error.message
+            );
+
+            return;
+        }
+
+
+        renderPosts(
+            data || []
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showError(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =================================
+   RENDER
+================================= */
+
+function renderPosts(posts){
+
+    if(!posts.length){
+
+        feed.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                هنوز اطلاعیه‌ای منتشر نشده است.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    feed.innerHTML = "";
+
+
+    posts.forEach(
+        (post,index) => {
+
+            const info =
+                getPostType(
+                    post.type
+                );
+
+
+            const article =
+                document.createElement(
+                    "article"
+                );
+
+
+            article.className =
+                "post " +
+                info.className;
+
+
+            article.style.animationDelay =
+                (index * .04) + "s";
+
+
+            article.innerHTML = `
+
+                <div class="post-header">
+
+                    <div class="post-icon">
+                        ${info.icon}
+                    </div>
+
+                    <div class="post-meta">
+
+                        <div class="post-title">
+                            ${escapeHTML(post.title)}
+                        </div>
+
+                        <div class="post-type">
+                            ${info.label}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="post-content">
+                    ${escapeHTML(post.content)}
+                </div>
+
+
+                <div class="post-footer">
+
+                    <span>
+                        ${formatDate(post.created_at)}
+                    </span>
+
+                    <span>
+                        ${formatTime(post.created_at)}
+                    </span>
+
+                    <span class="check">
+                        ✓✓
+                    </span>
+
+                </div>
+
+            `;
+
+
+            feed.appendChild(
+                article
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================
+   ESCAPE HTML
+================================= */
+
+function escapeHTML(value){
+
+    if(value === null ||
+       value === undefined){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =================================
+   ERROR
+================================= */
+
+function showError(message){
+
+    feed.innerHTML = `
+
+        <div class="error">
+
+            ❌ دریافت اطلاعیه‌ها انجام نشد.
+
+            <br><br>
+
+            ${escapeHTML(message)}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =================================
+   REALTIME
+================================= */
+
+supabaseClient
+
+.channel(
+    "v2gurd-posts"
+)
+
+.on(
+
+    "postgres_changes",
+
+    {
+        event:"*",
+        schema:"public",
+        table:"posts"
+    },
+
+    payload => {
+
+        console.log(
+            "Realtime update:",
+            payload
+        );
+
+        loadPosts();
+
+    }
+
+)
+
+.subscribe();
+
+
+/* =================================
+   INITIAL LOAD
+================================= */
+
+loadPosts();
+
+</script>
 
 </body>
 </html>
