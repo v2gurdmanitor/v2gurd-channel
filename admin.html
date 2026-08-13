@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>V2GURD Admin</title>
 
@@ -22,8 +17,9 @@ content="width=device-width, initial-scale=1.0"
     --green:#39ff88;
     --blue:#2196ff;
     --red:#ff4164;
+    --yellow:#ffd166;
     --bg:#020608;
-    --card:rgba(7,18,23,.82);
+    --card:rgba(7,18,23,.84);
     --border:rgba(57,255,136,.14);
     --text:#effff6;
     --muted:#71877e;
@@ -70,6 +66,7 @@ body::before{
     filter:blur(120px);
     opacity:.12;
     z-index:-4;
+    pointer-events:none;
 }
 
 .green{
@@ -87,7 +84,7 @@ body::before{
 .container{
     width:min(700px,calc(100% - 24px));
     margin:auto;
-    padding:35px 0 60px;
+    padding:30px 0 60px;
 }
 
 
@@ -98,8 +95,8 @@ body::before{
     justify-content:space-between;
     align-items:center;
 
-    padding-bottom:20px;
-    margin-bottom:20px;
+    padding-bottom:18px;
+    margin-bottom:22px;
 
     border-bottom:1px solid var(--border);
 }
@@ -124,47 +121,35 @@ body::before{
 
     font-size:10px;
 
-    box-shadow:0 0 14px rgba(22,143,255,.55);
+    box-shadow:
+        0 0 14px rgba(22,143,255,.55);
 }
 
-.logout{
-    width:auto;
+.status{
+    display:flex;
+    align-items:center;
+    gap:7px;
 
-    padding:8px 13px;
+    color:var(--green);
 
-    border-radius:10px;
-
-    background:rgba(255,65,100,.08);
-
-    border:1px solid rgba(255,65,100,.2);
-
-    color:var(--red);
-
-    cursor:pointer;
-
-    font-family:inherit;
     font-size:9px;
+    margin-top:4px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 12px var(--green);
 }
 
 
-/* LOGIN */
-
-.login{
-    max-width:420px;
-    margin:80px auto;
-}
-
-.login h1{
-    text-align:center;
-    margin-bottom:8px;
-}
-
-.login p{
-    text-align:center;
-    color:var(--muted);
-    font-size:10px;
-    margin-bottom:22px;
-}
+/* CARD */
 
 .card{
     background:var(--card);
@@ -179,6 +164,41 @@ body::before{
 
     margin-bottom:16px;
 }
+
+.card-title{
+    font-size:13px;
+    font-weight:700;
+
+    margin-bottom:18px;
+}
+
+
+/* LOGIN */
+
+.login{
+    max-width:420px;
+    margin:70px auto;
+}
+
+.login-title{
+    text-align:center;
+    font-size:24px;
+    font-weight:800;
+}
+
+.login-subtitle{
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:7px;
+    margin-bottom:22px;
+}
+
+
+/* INPUTS */
 
 label{
     display:block;
@@ -197,7 +217,6 @@ select{
     width:100%;
 
     outline:none;
-
     border:none;
 
     color:white;
@@ -215,6 +234,7 @@ select{
     font-family:inherit;
     font-size:11px;
 
+    transition:.2s;
 }
 
 textarea{
@@ -226,14 +246,22 @@ input:focus,
 textarea:focus,
 select:focus{
 
-    border-color:rgba(57,255,136,.35);
+    border-color:
+        rgba(57,255,136,.4);
 
     box-shadow:
-        0 0 20px rgba(57,255,136,.05);
-
+        0 0 20px
+        rgba(57,255,136,.06);
 }
 
-button.primary{
+
+/* BUTTON */
+
+button{
+    font-family:inherit;
+}
+
+.primary{
 
     width:100%;
 
@@ -247,8 +275,6 @@ button.primary{
 
     color:#001108;
 
-    font-family:inherit;
-
     font-size:11px;
 
     font-weight:800;
@@ -256,74 +282,170 @@ button.primary{
     cursor:pointer;
 
     transition:.25s;
-
 }
 
-button.primary:hover{
+.primary:hover{
 
     transform:translateY(-2px);
 
     box-shadow:
-        0 0 25px rgba(57,255,136,.2);
-
+        0 0 25px
+        rgba(57,255,136,.2);
 }
+
+.primary:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+}
+
+
+/* LOGOUT */
+
+.logout{
+
+    width:auto;
+
+    padding:8px 13px;
+
+    border-radius:10px;
+
+    background:
+        rgba(255,65,100,.08);
+
+    border:
+        1px solid
+        rgba(255,65,100,.2);
+
+    color:var(--red);
+
+    cursor:pointer;
+
+    font-size:9px;
+}
+
+
+/* MESSAGES */
 
 .message{
 
-    margin-top:12px;
+    margin-top:13px;
 
-    text-align:center;
+    padding:11px;
+
+    border-radius:11px;
 
     font-size:9px;
 
-    color:var(--red);
+    line-height:1.8;
+
+    display:none;
+
+    word-break:break-word;
+}
+
+.message.show{
+    display:block;
+}
+
+.message.error{
+
+    color:#ff8da4;
+
+    background:
+        rgba(255,65,100,.07);
+
+    border:
+        1px solid
+        rgba(255,65,100,.15);
+}
+
+.message.success{
+
+    color:var(--green);
+
+    background:
+        rgba(57,255,136,.06);
+
+    border:
+        1px solid
+        rgba(57,255,136,.12);
+}
+
+.message.info{
+
+    color:#7dbdff;
+
+    background:
+        rgba(33,150,255,.06);
+
+    border:
+        1px solid
+        rgba(33,150,255,.12);
 }
 
 
 /* ADMIN */
 
-.admin h1{
+.admin-title{
     font-size:25px;
+    font-weight:800;
 }
 
-.subtitle{
+.admin-subtitle{
+
     color:var(--muted);
+
     font-size:9px;
+
     margin-top:5px;
     margin-bottom:25px;
 }
 
-.card-title{
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:17px;
-}
 
-.success{
-    color:var(--green);
-}
+/* LINKS */
 
-.status{
-    display:flex;
-    align-items:center;
-    gap:7px;
+.bottom-link{
 
-    margin-top:10px;
+    display:block;
 
-    color:var(--green);
+    text-align:center;
+
+    color:var(--muted);
+
+    text-decoration:none;
 
     font-size:9px;
+
+    margin-top:18px;
 }
 
-.dot{
-    width:7px;
-    height:7px;
+.bottom-link:hover{
+    color:var(--green);
+}
 
-    border-radius:50%;
 
-    background:var(--green);
+/* MOBILE */
 
-    box-shadow:0 0 12px var(--green);
+@media(max-width:600px){
+
+    .container{
+        width:calc(100% - 18px);
+    }
+
+    .card{
+        padding:17px;
+    }
+
+    .admin-title{
+        font-size:22px;
+    }
+
 }
 
 </style>
@@ -340,41 +462,39 @@ button.primary:hover{
 <div class="container">
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
 <section
 id="loginSection"
 class="login"
 >
 
-<div class="header">
-
-<div class="logo">
-V2GURD
-<span class="verify">✓</span>
-</div>
-
-</div>
-
-
 <div class="card">
 
-<h1>
-🔐 ورود مدیریت
-</h1>
+<div class="logo" style="text-align:center;">
+    V2GURD
+    <span class="verify">✓</span>
+</div>
 
-<p>
-V2GURD CONTROL CENTER
-</p>
+<div class="login-title">
+    🔐 ورود مدیریت
+</div>
+
+<div class="login-subtitle">
+    V2GURD CONTROL CENTER
+</div>
 
 
 <label>
-ایمیل
+ایمیل مدیریت
 </label>
 
 <input
 id="email"
 type="email"
+autocomplete="email"
 placeholder="admin@example.com"
 >
 
@@ -386,11 +506,13 @@ placeholder="admin@example.com"
 <input
 id="password"
 type="password"
+autocomplete="current-password"
 placeholder="••••••••"
 >
 
 
 <button
+id="loginButton"
 class="primary"
 onclick="login()"
 >
@@ -409,11 +531,12 @@ class="message"
 
 
 
-<!-- ADMIN PANEL -->
+<!-- =========================
+     ADMIN
+========================= -->
 
 <section
 id="adminSection"
-class="admin"
 style="display:none;"
 >
 
@@ -423,13 +546,18 @@ style="display:none;"
 <div>
 
 <div class="logo">
+
 V2GURD
 <span class="verify">✓</span>
+
 </div>
 
 <div class="status">
+
 <span class="dot"></span>
+
 ADMIN ONLINE
+
 </div>
 
 </div>
@@ -445,19 +573,21 @@ onclick="logout()"
 </div>
 
 
-<h1>
+<div class="admin-title">
 مدیریت اطلاعیه‌ها
-</h1>
-
-<div class="subtitle">
-انتشار مستقیم اطلاعیه برای کاربران V2GURD
 </div>
 
+<div class="admin-subtitle">
+انتشار مستقیم اطلاعیه برای کانال V2GURD
+</div>
+
+
+<!-- CREATE POST -->
 
 <div class="card">
 
 <div class="card-title">
-📢 انتشار اطلاعیه جدید
+📢 اطلاعیه جدید
 </div>
 
 
@@ -498,7 +628,7 @@ placeholder="مثلاً: بروزرسانی سرورها"
 
 
 <label>
-متن
+متن اطلاعیه
 </label>
 
 <textarea
@@ -508,6 +638,7 @@ placeholder="متن اطلاعیه را بنویس..."
 
 
 <button
+id="publishButton"
 class="primary"
 onclick="publishPost()"
 >
@@ -525,20 +656,12 @@ class="message"
 
 <a
 href="./index.html"
-style="
-display:block;
-text-align:center;
-color:#71877e;
-font-size:9px;
-text-decoration:none;
-"
+class="bottom-link"
 >
-← مشاهده کانال
+← مشاهده کانال V2GURD
 </a>
 
-
 </section>
-
 
 </div>
 
@@ -546,14 +669,12 @@ text-decoration:none;
 
 <script>
 
-
-/* ==========================
-   SUPABASE
-========================== */
+/* =================================
+   SUPABASE CONFIG
+================================= */
 
 const SUPABASE_URL =
 "https://dymfrorzgmmsbvazsvnb.supabase.co";
-
 
 const SUPABASE_KEY =
 "sb_publishable_UXgv11NDv5gIxPdKwMZwZQ_WSQZa2qw";
@@ -566,24 +687,64 @@ window.supabase.createClient(
 );
 
 
-/* ==========================
+/* =================================
+   MESSAGE HELPER
+================================= */
+
+function showMessage(
+    elementId,
+    text,
+    type
+){
+
+    const element =
+        document.getElementById(elementId);
+
+    element.textContent = text;
+
+    element.className =
+        "message show " + type;
+
+}
+
+
+/* =================================
    LOGIN
-========================== */
+================================= */
 
 async function login(){
 
     const email =
-        document.getElementById("email").value.trim();
+        document.getElementById(
+            "email"
+        ).value.trim();
 
     const password =
-        document.getElementById("password").value;
+        document.getElementById(
+            "password"
+        ).value;
+
+    const button =
+        document.getElementById(
+            "loginButton"
+        );
 
 
-    const message =
-        document.getElementById("loginMessage");
+    if(!email || !password){
+
+        showMessage(
+            "loginMessage",
+            "⚠️ ایمیل و رمز عبور را وارد کن.",
+            "error"
+        );
+
+        return;
+    }
 
 
-    message.textContent =
+    button.disabled = true;
+
+    button.textContent =
         "در حال ورود...";
 
 
@@ -591,60 +752,101 @@ async function login(){
         data,
         error
     } =
-    await supabaseClient.auth.signInWithPassword({
+    await supabaseClient.auth
+        .signInWithPassword({
 
-        email:email,
+            email:email,
 
-        password:password
+            password:password
 
-    });
+        });
+
+
+    button.disabled = false;
+
+    button.textContent =
+        "ورود به پنل";
 
 
     if(error){
 
-        message.textContent =
-            "❌ ایمیل یا رمز عبور اشتباه است.";
+        console.error(
+            "LOGIN ERROR:",
+            error
+        );
+
+        showMessage(
+            "loginMessage",
+            "❌ ورود ناموفق: " +
+            error.message,
+            "error"
+        );
 
         return;
     }
 
 
-    showAdmin();
+    if(data && data.session){
+
+        showAdmin();
+
+    }else{
+
+        showMessage(
+            "loginMessage",
+            "❌ Session ایجاد نشد.",
+            "error"
+        );
+
+    }
 
 }
 
 
-/* ==========================
+/* =================================
    SHOW ADMIN
-========================== */
+================================= */
 
 function showAdmin(){
 
     document.getElementById(
         "loginSection"
-    ).style.display="none";
+    ).style.display = "none";
 
 
     document.getElementById(
         "adminSection"
-    ).style.display="block";
+    ).style.display = "block";
 
 }
 
 
-/* ==========================
+/* =================================
    CHECK SESSION
-========================== */
+================================= */
 
 async function checkSession(){
 
     const {
-        data
+        data,
+        error
     } =
-    await supabaseClient.auth.getSession();
+    await supabaseClient.auth
+        .getSession();
 
 
-    if(data.session){
+    if(error){
+
+        console.error(
+            "SESSION ERROR:",
+            error
+        );
+
+        return;
+    }
+
+
+    if(data && data.session){
 
         showAdmin();
 
@@ -653,9 +855,9 @@ async function checkSession(){
 }
 
 
-/* ==========================
+/* =================================
    LOGOUT
-========================== */
+================================= */
 
 async function logout(){
 
@@ -666,92 +868,215 @@ async function logout(){
 }
 
 
-/* ==========================
-   PUBLISH
-========================== */
+/* =================================
+   PUBLISH POST
+================================= */
 
 async function publishPost(){
 
     const title =
-        document.getElementById("title").value.trim();
+        document.getElementById(
+            "title"
+        ).value.trim();
 
     const content =
-        document.getElementById("content").value.trim();
+        document.getElementById(
+            "content"
+        ).value.trim();
 
     const type =
-        document.getElementById("type").value;
+        document.getElementById(
+            "type"
+        ).value;
 
 
-    const message =
-        document.getElementById("publishMessage");
+    const button =
+        document.getElementById(
+            "publishButton"
+        );
 
 
-    if(!title || !content){
+    if(!title){
 
-        message.textContent =
-            "⚠️ عنوان و متن را وارد کن.";
+        showMessage(
+            "publishMessage",
+            "⚠️ عنوان را وارد کن.",
+            "error"
+        );
 
         return;
     }
 
 
-    message.textContent =
+    if(!content){
+
+        showMessage(
+            "publishMessage",
+            "⚠️ متن اطلاعیه را وارد کن.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
         "در حال انتشار...";
 
 
-    const {
-        error
-    } =
-    await supabaseClient
-
-        .from("posts")
-
-        .insert({
-
-            title:title,
-
-            content:content,
-
-            type:type,
-
-            published:true
-
-        });
+    showMessage(
+        "publishMessage",
+        "⏳ در حال ارسال به دیتابیس...",
+        "info"
+    );
 
 
-    if(error){
+    try{
 
-        console.error(error);
+        /* -------------------------
+           CHECK SESSION
+        ------------------------- */
 
-        message.textContent =
-            "❌ انتشار انجام نشد.";
+        const {
+            data:sessionData,
+            error:sessionError
+        } =
+        await supabaseClient.auth
+            .getSession();
 
-        return;
+
+        if(sessionError){
+
+            throw sessionError;
+
+        }
+
+
+        if(
+            !sessionData ||
+            !sessionData.session
+        ){
+
+            throw new Error(
+                "نشست مدیریت معتبر نیست. دوباره وارد شوید."
+            );
+
+        }
+
+
+        /* -------------------------
+           INSERT
+        ------------------------- */
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+
+            .from("posts")
+
+            .insert({
+
+                title:title,
+
+                content:content,
+
+                type:type,
+
+                published:true
+
+            })
+
+            .select();
+
+
+        if(error){
+
+            console.error(
+                "SUPABASE INSERT ERROR:",
+                error
+            );
+
+            throw error;
+
+        }
+
+
+        /* -------------------------
+           SUCCESS
+        ------------------------- */
+
+        console.log(
+            "POST CREATED:",
+            data
+        );
+
+
+        showMessage(
+            "publishMessage",
+            "✅ اطلاعیه با موفقیت منتشر شد.",
+            "success"
+        );
+
+
+        document.getElementById(
+            "title"
+        ).value = "";
+
+
+        document.getElementById(
+            "content"
+        ).value = "";
+
+
+    }catch(error){
+
+        console.error(
+            "PUBLISH ERROR:",
+            error
+        );
+
+
+        let errorText =
+            error.message ||
+            "خطای ناشناخته";
+
+
+        if(error.code){
+
+            errorText +=
+                " | Code: " +
+                error.code;
+
+        }
+
+
+        showMessage(
+            "publishMessage",
+            "❌ انتشار ناموفق: " +
+            errorText,
+            "error"
+        );
+
     }
 
 
-    message.textContent =
-        "✅ اطلاعیه با موفقیت منتشر شد.";
+    button.disabled = false;
 
-
-    document.getElementById(
-        "title"
-    ).value="";
-
-
-    document.getElementById(
-        "content"
-    ).value="";
+    button.textContent =
+        "🚀 انتشار اطلاعیه";
 
 }
 
 
-/* ==========================
+/* =================================
    START
-========================== */
+================================= */
 
 checkSession();
-
 
 </script>
 
